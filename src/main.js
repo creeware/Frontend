@@ -5,6 +5,9 @@ import App from './App.vue'
 import router from './router'
 import { VueAuthenticate } from 'vue-authenticate'
 import store from '@/store'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.prototype.$http = Axios
 
 const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
@@ -49,6 +52,7 @@ const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
 })
 
 Vue.use(Vuex)
+Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
