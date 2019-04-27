@@ -27,26 +27,30 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
-
-    <button @click="authenticate('oauth2')">auth Github</button>
+    <p v-if="isAuthenticated"> Logged in </p>
+    <button @click="login('oauth2')">auth Github</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import store from '@/store'
+
 export default {
   name: 'HelloWorld',
   mounted(){
     this.$http.get('/api');
   },
+  computed: {
+    ...mapState({
+      isAuthenticated: state => state.authentication.isAuthenticated
+    })
+  },
   props: {
     msg: String
   },
   methods: {
-    authenticate: function (provider) {
-      this.$auth.authenticate(provider).then(response => {
-        this.$auth.setToken(response.data)
-      })
-    }
+    ...mapActions(['login']),
   }
 }
 </script>

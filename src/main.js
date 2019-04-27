@@ -1,12 +1,13 @@
 import Vue from 'vue'
-import App from './App.vue'
-import VueAuthenticate from 'vue-authenticate'
+import Vuex from 'vuex'
 import Axios from 'axios'
+import App from './App.vue'
 import router from './router'
-
+import { VueAuthenticate } from 'vue-authenticate'
+import store from '@/store'
 Vue.prototype.$http = Axios
 
-Vue.use(VueAuthenticate, {
+const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
   baseUrl: '', // Your API domain
   tokenPath: 'access_token',
   tokenName: 'access_token',
@@ -47,9 +48,14 @@ Vue.use(VueAuthenticate, {
   }
 })
 
+Vue.use(Vuex)
+
 Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
+
+export { vueAuthenticate };
