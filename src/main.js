@@ -8,7 +8,9 @@ import store from '@/store'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+
 Vue.prototype.$http = Axios
+Vue.prototype.$http.defaults.withCredentials = true
 
 const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
   baseUrl: '', // Your API domain
@@ -41,10 +43,11 @@ const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
 
   providers: {
     oauth2: {
-      redirectUri: process.env.VUE_APP_SERVER_CALLBACK_URL, // client app URL
-      url: '/authentication',
+      redirectUri: process.env.NODE_ENV == "development" ? process.env.VUE_APP_SERVER_CALLBACK_URL : "https://creeware.com/auth/callback", // client app URL
+      clientId: 43859343045838430,
+      url: '/api/authorization',
       name: 'gitlab',
-      authorizationEndpoint: '/authentication',
+      authorizationEndpoint: '/api/authentication',
       oauthType: '2.0'
     }
   }

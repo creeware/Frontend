@@ -35,12 +35,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import store from '@/store'
 
 export default {
   name: 'HelloWorld',
   mounted(){
-    this.$http.get('/api');
   },
   computed: {
     ...mapState({

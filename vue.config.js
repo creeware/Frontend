@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     proxy: {
-        'api/*': {
+      'api/*': {
         target: process.env.VUE_APP_API_URL,
         rewrite: { "^/api": "" },
         ws: true,
@@ -10,6 +10,12 @@ module.exports = {
       "authentication/*": {
         target: process.env.VUE_APP_API_URL,
         rewrite: { "^/authentication": "" },
+        ws: true,
+        changeOrigin: true
+      },
+      "authorization/*": {
+        target: process.env.VUE_APP_API_URL,
+        rewrite: { "^/authorization": "" },
         ws: true,
         changeOrigin: true
       }

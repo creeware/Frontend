@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+- 10.15.3
+- node
+env:
+- WEBPACK_VERSION=4
+before_script:
+- npm install --no-save
+stages:
+- lint
+- build
+jobs:
+  include:
+  - stage: lint
+    script:
+    - npm run lint
+  - stage: build
+    script:
+    - npm run build
+  - stage: deploy
+    if: branch = develop
+    before_install:
+      - openssl aes-256-cbc -K $encrypted_e7c7fa376aab_key -iv $encrypted_e7c7fa376aab_iv
+        -in .travis/deploy.key.enc -out .travis/deploy.key -d
+    after_success:
+      - eval "$(ssh-agent -s)"
+      - chmod 600 .travis/deploy.key
+      - ssh-add .travis/deploy.key
+      - ssh-keyscan 104.248.249.119 >> ~/.ssh/known_hosts
+      - git remote add deploy dokku@104.248.249.119:app.git
+      - git config --global push.default simple
+      - git push -f deploy HEAD:refs/heads/master
