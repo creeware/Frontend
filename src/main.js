@@ -45,8 +45,7 @@ const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
       url: '/authentication',
       name: 'gitlab',
       authorizationEndpoint: '/authentication',
-      oauthType: '2.0',
-      popupOptions: { width: 1020, height: 618 }
+      oauthType: '2.0'
     }
   }
 })
