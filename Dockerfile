@@ -1,6 +1,8 @@
 FROM node:10
 COPY ./ /app
 WORKDIR /app
+ARG VUE_APP_GITHUB_OAUTH_KEY
+RUN touch .env && echo VUE_APP_GITHUB_OAUTH_KEY=${VUE_APP_GITHUB_OAUTH_KEY} >> .env
 RUN npm install && npm run build
 
 FROM nginx

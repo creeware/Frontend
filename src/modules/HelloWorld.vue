@@ -29,7 +29,7 @@
     </ul>
     <el-button v-if="isAuthenticated" type="success" icon="el-icon-check" circle></el-button>
     <p v-if="isAuthenticated"> Logged in </p>
-    <button @click="login('oauth2')">auth Github</button>
+    <button @click="login('github')">auth Github</button>
   </div>
 </template>
 
@@ -39,6 +39,7 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'HelloWorld',
   mounted(){
+    this.$http.get("api/repositories/aa8bc9fd-db3e-4307-97de-2a035f7e2709")
   },
   computed: {
     ...mapState({
