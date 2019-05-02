@@ -1,4 +1,5 @@
 import { vueAuthenticate } from "@/main.js"
+import router from "../../../router";
 
 const actions = {
   login( { commit }, provider) {
@@ -9,6 +10,7 @@ const actions = {
         commit("SET_AUTHENTICATED", {
           isAuthenticated: vueAuthenticate.isAuthenticated()
         });
+        router.push({ name: "dashboard" });
       })
     })
   }

@@ -1,10 +1,9 @@
-
-var webpack = require('webpack')
+var webpack = require("webpack");
 
 module.exports = {
   devServer: {
     proxy: {
-      'api/*': {
+      "api/*": {
         target: process.env.VUE_APP_API_URL,
         rewrite: { "^/api": "" },
         ws: true,
@@ -27,7 +26,8 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
-          'process.env.VUE_APP_GITHUB_OAUTH_KEY': process.env.VUE_APP_GITHUB_OAUTH_KEY
+        "process.env.VUE_APP_GITHUB_OAUTH_KEY":
+          process.env.VUE_APP_GITHUB_OAUTH_KEY
       })
     ]
   }
