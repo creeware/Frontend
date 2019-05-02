@@ -13,7 +13,7 @@ Vue.prototype.$http = Axios
 Vue.prototype.$http.defaults.withCredentials = true
 
 const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
-  baseUrl: '', // Your API domain
+  baseUrl: 'auth/', // Your API domain
   tokenPath: 'access_token',
   tokenName: 'access_token',
   tokenPrefix: '',
@@ -42,12 +42,13 @@ const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
   },
 
   providers: {
-    oauth2: {
-      redirectUri: process.env.NODE_ENV == "development" ? process.env.VUE_APP_SERVER_CALLBACK_URL : "https://creeware.com/auth/callback", // client app URL
-      clientId: 43859343045838430,
-      url: '/api/authorization',
+    github: {
+      redirectUri: process.env.NODE_ENV == "development" ? process.env.VUE_APP_SERVER_CALLBACK_URL : "https://creeware.com/callback", // client app URL
+      clientId: process.env.VUE_APP_GITHUB_OAUTH_KEY,
       name: 'gitlab',
-      authorizationEndpoint: '/api/authentication',
+      url: '/github',
+      scope: ['user:email user repo admin:org admin:org_hook delete_repo'],
+      scopeDelimiter: ' ',
       oauthType: '2.0'
     }
   }
