@@ -1,18 +1,26 @@
 <template>
-<el-container style="width: 100vw;">
-  <el-aside><sidebar/></el-aside>
-  <el-main style="color: $--color-primary; height: 100vh; display:block;"><router-view/></el-main>
-</el-container>
+  <el-container style="width: 100vw;">
+    <el-aside :class="sidebarCollapsed ? 'sidebar-collapsed': 'sidebar-not-collapsed'">
+      <sidebar
+        :isCollapsed="sidebarCollapsed"
+        @handle-collapse="sidebarCollapsed = !sidebarCollapsed"
+      />
+    </el-aside>
+    <el-main class="bg-grey main-container-view">
+      <transition name="el-fade-in">
+        <router-view class="transition-box"/>
+      </transition>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import Sidebar from '../_component/Sidebar.vue'
+import { mapState, mapActions } from "vuex";
+import Sidebar from "../_component/Sidebar.vue";
 
 export default {
-  name: 'Dashboard',
-  mounted(){
-  },
+  name: "Dashboard",
+  mounted() {},
   components: {
     Sidebar
   },
@@ -21,12 +29,16 @@ export default {
       isAuthenticated: state => state.authentication.isAuthenticated
     })
   },
-  props: {
+  data() {
+    return {
+      sidebarCollapsed: true
+    };
   },
+  props: {},
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"])
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
