@@ -12,24 +12,24 @@ const router = new Router({
   }
 })
 
-// router.beforeEach(function(to, from, next) {
-//   if (to.meta && to.meta.auth !== undefined) {
-//     if (to.meta.auth) {
-//       if (vueAuthenticate.isAuthenticated()) {
-//         next();
-//       } else {
-//         router.push({ name: "login" });
-//       }
-//     } else {
-//       if (vueAuthenticate.isAuthenticated()) {
-//         router.push({ name: "dashboard" });
-//       } else {
-//         next();
-//       }
-//     }
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach(function(to, from, next) {
+  if (to.meta && to.meta.auth !== undefined) {
+    if (to.meta.auth) {
+      if (vueAuthenticate.isAuthenticated()) {
+        next();
+      } else {
+        router.push({ name: "login" });
+      }
+    } else {
+      if (vueAuthenticate.isAuthenticated()) {
+        router.push({ name: "dashboard" });
+      } else {
+        next();
+      }
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;

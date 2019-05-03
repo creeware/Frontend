@@ -1,11 +1,64 @@
 @import "colors";
+@import "flexbox";
 
 .background-box {
   width: 100vw;
   height: 100vh;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
+  background-color: $grey;
 }
+
+.main-container-view {
+  height: 100vh;
+  display: flex;
+  @include align-items(center);
+  @include justify-content(center);
+}
+
+.section-container-view {
+  margin: 50px;
+  padding: 20px;
+}
+
+.section-container-card{
+  box-shadow: 0 0 1em 0.2em $lighter-black !important;
+  width: 95%; height: 90vh;
+}
+
+.login-container-view {
+  display: flex;
+  @include align-items(center);
+  @include justify-content(center);
+  text-align: center;
+}
+
+.container-card {
+  display: flex;
+  @include align-items(center);
+  @include align-content(center);
+  @include justify-content(center);
+  @include flex-direction(column);
+}
+
+.login-card {
+  height: 50%;
+  width: 30%;
+}
+
+.login-container-item {
+  margin-top: 20px;
+}
+
+.sidebar-collapsed {
+  width: 64px !important;
+}
+
+.sidebar-not-collapsed {
+  width: 300px !important;
+}
+
