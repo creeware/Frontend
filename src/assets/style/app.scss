@@ -1,5 +1,9 @@
 @import "colors";
 @import "flexbox";
+@import "profile";
+@import "login";
+
+@import url("https://fonts.googleapis.com/css?family=Gugi|Roboto+Slab");
 
 .background-box {
   width: 100vw;
@@ -8,13 +12,15 @@
 
 body,
 html {
+  overflow-y: hidden;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
   background-color: $grey;
 }
 
 .main-container-view {
-  height: 100vh;
+  height: 100%;
   display: flex;
   @include align-items(center);
   @include justify-content(center);
@@ -23,19 +29,33 @@ html {
 .section-container-view {
   margin: 50px;
   padding: 20px;
-}
-
-.section-container-card{
-  box-shadow: 0 0 1em 0.2em $lighter-black !important;
-  width: 95%; height: 90vh;
-}
-
-.login-container-view {
+  width: 95%;
+  height: 90vh;
   display: flex;
-  @include align-items(center);
-  @include justify-content(center);
-  text-align: center;
+  @include flex-wrap(wrap);
+  @include align-items(flex-start);
+  @include align-content(stretch);
+  @include justify-content(space-around);
 }
+
+.section-container-card {
+  box-shadow: 0 0 1em 0.2em $lighter-black !important;
+  width: 20%;
+  height: 50%;
+}
+.section-container-card-big{
+  box-shadow: 0 0 1em 0.2em $lighter-black !important;
+  width: 30%;
+  height: 30%;
+}
+
+.section-container-card-bigger{
+  box-shadow: 0 0 1em 0.2em $lighter-black !important;
+  width: 50%;
+  height: 50%;
+}
+
+
 
 .container-card {
   display: flex;
@@ -45,14 +65,7 @@ html {
   @include flex-direction(column);
 }
 
-.login-card {
-  height: 50%;
-  width: 30%;
-}
 
-.login-container-item {
-  margin-top: 20px;
-}
 
 .sidebar-collapsed {
   width: 64px !important;
@@ -61,4 +74,23 @@ html {
 .sidebar-not-collapsed {
   width: 300px !important;
 }
+
+.link-item {
+  font-weight: bold;
+  text-decoration: none;
+  color: $primary;
+}
+
+.gugi-text{
+  font-family: "Gugi", cursive !important;
+}
+
+.roboto-text {
+  font-family: "Roboto", sans-serif !important;
+}
+
+
+
+
+
 

@@ -1,0 +1,25 @@
+@import "flexbox";
+
+.profile-image {
+    border-radius: 50%;
+}
+
+.profile-box{
+    border-radius: 10px;
+    box-shadow: 0 0 1em 0.2em $lighter-black !important;
+    display: flex;
+    @include align-items(center);
+    @include justify-content(flex-start);
+    @include flex-direction(row);
+    @include flex-wrap(nowrap);
+}
+
+.profile-summary {
+    width: 80%; 
+    height: 80%;
+    display: flex;
+    @include align-items(flex-end);
+    @include justify-content(flex-end);
+    @include flex-direction(column);
+    align-self: flex-end;
+}

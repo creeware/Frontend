@@ -1,68 +1,52 @@
-/// color|1|Brand Color|0
-$--color-primary: #5AB9EA !default;
-/// color|1|Background Color|4
-$--color-white: #FFFFFF !default;
-/// color|1|Background Color|4
-$--color-black: #000000 !default;
-$--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
-$--color-primary-light-2: mix($--color-white, $--color-primary, 20%) !default; /* 66b1ff */
-$--color-primary-light-3: mix($--color-white, $--color-primary, 30%) !default; /* 79bbff */
-$--color-primary-light-4: mix($--color-white, $--color-primary, 40%) !default; /* 8cc5ff */
-$--color-primary-light-5: mix($--color-white, $--color-primary, 50%) !default; /* a0cfff */
-$--color-primary-light-6: mix($--color-white, $--color-primary, 60%) !default; /* b3d8ff */
-$--color-primary-light-7: mix($--color-white, $--color-primary, 70%) !default; /* c6e2ff */
-$--color-primary-light-8: mix($--color-white, $--color-primary, 80%) !default; /* d9ecff */
-$--color-primary-light-9: mix($--color-white, $--color-primary, 90%) !default; /* ecf5ff */
-/// color|1|Functional Color|1
-$--color-success: #41B3A3 !default;
-/// color|1|Functional Color|1
-$--color-warning: #E8A87C !default;
-/// color|1|Functional Color|1
-$--color-danger: #E27D60 !default;
-/// color|1|Functional Color|1
-$--color-info: #C38D9E !default;
-
-/// color|1|Font Color|2
-$--color-text-primary: #303133 !default;
-/// color|1|Font Color|2
-$--color-text-regular: #606266 !default;
-/// color|1|Font Color|2
-$--color-text-secondary: #909399 !default;
-/// color|1|Font Color|2
-$--color-text-placeholder: #C0C4CC !default;
-/// color|1|Border Color|3
-$--border-color-base: #DCDFE6 !default;
-/// color|1|Border Color|3
-$--border-color-light: #E4E7ED !default;
-/// color|1|Border Color|3
-$--border-color-lighter: #EBEEF5 !default;
-/// color|1|Border Color|3
-$--border-color-extra-light: #F2F6FC !default;
-
-$--calendar-selected-background-color: #C38D9E !default;
-
-// Background
-/// color|1|Background Color|4
-$--background-color-base: #C38D9E !default;
-
-/* icon font path, required */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
-
-$grey: #4E4E50;
+// Colors
+$grey: #4e4e50;
 $lighter-black: #2227;
+$cello: #ec8b5e;
+$primary: #00ACC1 !default;
+$white: #ffffff !default;
+$black: #000000 !default;
+$success: #41b3a3 !default;
+$warning: #e8a87c !default;
+$danger: #e27d60 !default;
+$info: #c38d9e !default;
 
 $colors: (
-    "primary": $--color-primary,
-    "success": $--color-success,
-    "grey": $grey,
-    "lighter-black": $lighter-black
+  "primary": $primary,
+  "success": $success,
+  "warning": $warning,
+  "danger": $danger,
+  "info": $info,
+  "white": $white,
+  "black": $black,
+  "grey": $grey,
+  "lighter-black": $lighter-black,
+  "cello": $cello
 ) !default;
 
-
 @each $color, $value in $colors {
-    .bg-#{$color} {
-      background-color: #{$value};
-    }
+  .bg-#{$color} {
+    background-color: #{$value} !important;
   }
+}
 
-@import "~element-ui/packages/theme-chalk/src/index";
+$primary-light-1: mix($white, $primary, 10%) !default;
+$primary-light-2: mix($white, $primary, 20%) !default;
+$primary-light-3: mix($white, $primary, 30%) !default;
+$primary-light-4: mix($white, $primary, 40%) !default;
+$primary-light-5: mix($white, $primary, 50%) !default;
+$primary-light-6: mix($white, $primary, 60%) !default;
+$primary-light-7: mix($white, $primary, 70%) !default;
+$primary-light-8: mix($white, $primary, 80%) !default;
+$primary-light-9: mix($white, $primary, 90%) !default;
+
+$text-primary: #161b21 !default;
+$text-regular: #5f6366 !default;
+$text-secondary: #1d1b1b !default;
+$text-placeholder: #c38d9e !default;
+$border-color-base: $primary !default;
+$border-color-light: mix($white, $border-color-base, 20%) !default;
+$border-color-lighter: mix($white, $border-color-base, 40%) !default;
+$border-color-extra-light: mix($white, $border-color-base, 80%) !default;
+
+$calendar-selected-background-color: #c0c4cc !default;
+$background-color-base: #c0c4cc !default;
