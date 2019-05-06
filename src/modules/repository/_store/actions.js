@@ -74,7 +74,7 @@ const actions = {
     });
   },
 
-  deleteRepository(uuid) {
+  deleteRepository({commit}, uuid) {
     return new Promise((resolve, reject) => {
       apiDeleteRepository(uuid)
         .then(response => {
