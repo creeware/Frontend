@@ -1,29 +1,26 @@
 <template>
-  <div id="user">
-    <el-card>
-      <el-row>
-        <el-col style="border-radius: 0.25em; overflow: hidden;" :span="3">
-          <el-image :src="this.user.profilePicture" fit="cover" style></el-image>
-        </el-col>
-        <el-col :span="20">
-          <span>{{user.username}}</span>
-        </el-col>
-      </el-row>
-    </el-card>
-  </div>
+    <UserProfile :profile="user"/>
 </template>
 
 <script>
-import "element-ui/lib/theme-chalk/display.css";
+import UserProfile from '@/modules/user/_components/UserProfile';
 
 export default {
   name: "user",
+  components: {
+    UserProfile
+  },
   data() {
     return {
       user: {
+        user_display_name: "Pontus Asp",
         username: "Pontusblue",
-        profilePicture:
-          "https://avatars2.githubusercontent.com/u/18573650?s=460&v=4"
+        avatar_url:
+          "https://avatars2.githubusercontent.com/u/18573650?s=460&v=4",
+        user_email: "poasp@kth.se",
+        profile_url: "https://github.com/Pontusblue",
+        user_bio: "I am master of faster lord of distaster, sanic's my name, speed's my game",
+        user_role: "Master",
       }
     };
   }
