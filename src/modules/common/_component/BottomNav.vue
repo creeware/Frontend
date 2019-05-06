@@ -1,6 +1,6 @@
 <template>
   <v-card height="56px" style="width: 50vw; margin: auto;">
-    <v-bottom-nav :active.sync="bottomNav" :value="true" absolute :color="color" app mandatory>
+    <v-bottom-nav :active.sync="bottomNav" :value="true" fixed :color="color" app mandatory>
       <router-link class="link-item" to="/dashboard">
         <v-btn color="white" flat value="dashboard">
           <span>Dashboard</span>

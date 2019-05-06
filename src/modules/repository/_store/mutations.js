@@ -5,7 +5,13 @@ const mutations = {
     state.repository = payload;
   },
   [TYPES.SET_REPOSITORIES](state, payload) {
-    state.repositories = payload;
+    state.repositories = payload.repositories;
+    state.repositoriesMeta = {
+      page: payload.page,
+      page_size: payload.page_size,
+      result_count: payload.result_count,
+      last_page: payload.last_page
+    };
   },
   [TYPES.SET_MINIMAL_REPOSITORIES](state, payload) {
     state.minimal_repositories = payload;
