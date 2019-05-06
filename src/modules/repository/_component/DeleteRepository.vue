@@ -17,10 +17,6 @@
 </template>
 
 <script>
-import CreateNewRepository from "@/modules/repository/_component/CreateNewRepository.vue"
-import CreateNewRepositoryVue from './CreateNewRepository.vue';
-
-
 export default {
     
 
@@ -35,9 +31,6 @@ export default {
         handleDelete: Function
     },
     methods: {
-    },
-    components:{
-        CreateNewRepository
     }
 }
 </script>

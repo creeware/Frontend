@@ -1,29 +1,127 @@
 <template>
-
+  <div>
+    <v-layout class="">
+      <v-flex xs4>
+        <organization-card class="mb-2" v-if="hasLoaded" :organization="organization"/>
+        <profile :profile="user" v-if="hasLoaded" />
+      </v-flex>
+      <v-flex xs8 class="ml-2">
+        <v-card v-if="hasLoaded" color="red">
+          <v-card-title class="title">
+            Repositories
+          </v-card-title>
+        </v-card>
+        <repository-list
+          v-if="hasLoaded"
+          :repositories="repositories"
+          :minimal_users="minimal_users"
+          :minimal_organizations="[organization]"
+          :minimal_repositories="[repositories]"
+          @handle-filter-change="applyFilterChange"
+          />
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
-
-
+import OrganizationCard from "@/modules/repository/_component/OrganizationCard.vue";
+import RepositoryList from "@/modules/repository/_component/RepositoryList.vue";
+import Profile from "@/modules/common/_component/Profile.vue";
+import store from "@/store";
+import { mapState, mapActions } from "vuex";
 export default {
-  name: 'Organization',
-  components: {
+  name: "Organization",
+  beforeMount() {
 
+    //this.params.filter.organization_uuid = this.organization.organization_uuid
+    //this.applyFilterChange(this.params.filter)
+    store.dispatch("getUser", this.organization.user_uuid).then(() => {
+      store.dispatch("getRepositories", this.params.filter).then(() => {
+        store.dispatch("getMinimalRepositories", this.params.filter).then(() => {
+          store.dispatch("getMinimalOrganizations", this.params.filter).then(() => {
+            store.dispatch("getMinimalUsers").then(() => {
+              this.isListLoading = false;
+              this.params.filter.organization_uuid = this.organization.organization_uuid 
+              this.applyFilterChange(this.params.filter)
+              //this.userFilter()
+              this.hasLoaded = true;
+            });
+          });
+        });
+      });
+    });
+  },
+  beforeRouteEnter(to, from, next) {
+    store.dispatch("getOrganization", to.params.uuid).then(() => {
+      next()});
+  },
+  computed: mapState({
+    organization: state => state.organization.organization,
+    user: state => state.user.user,
+    repositories: state => state.repository.repositories,
+    solution_repositories: state => state.repository.solution_repositories,
+    template_repositories: state => state.repository.template_repositories,
+    minimal_repositories: state => state.repository.minimal_repositories,
+    minimal_organizations: state => state.organization.minimal_organizations,
+    minimal_users: state => state.user.minimal_users
+  }),
+  components: {
+    //OrganizationNameBox,
+    //UserProfile,
+    OrganizationCard,
+    RepositoryList,
+    Profile
   },
   data() {
-    return {
-      deleteDialogVisible: false
-    };
+    return ({
+      isListLoading: false,
+      repositoriesLoading: false,
+      params: {
+        filter: {
+          organization_uuid: [],
+          user_uuid: [],
+          repository_status: undefined,
+          repository_type: undefined,
+          repository_submission_date: undefined,
+          release_date: undefined,
+          due_date: undefined
+        }
+      },
+      hasLoaded: false,
+      users: []
+    });
   },
   methods: {
-    handleClose(done) {
-      // INVESTIGATE THIS WARNING
-      this.$confirm("Are you sure to close this dialog?")
-        .then(() => {
-          done();
-        })
-        .catch(() => {});
+    ...mapActions([
+      "getRepositories",
+      "getTemplateRepositories",
+      "getSolutionRepositories",
+      "getUser"
+    ]),
+    handleFilterChange(solutionFilter, templateFilter) {
+      this.repositoriesLoading = true;
+      this.getSolutionRepositories(solutionFilter).then(() => {
+        this.getTemplateRepositories(templateFilter).then(() => {
+          this.repositoriesLoading = false;
+        });
+      });
+    },
+    applyFilterChange(filter) {
+      filter.organization_uuid = this.organization.organization_uuid;
+      this.$emit("handle-filter-change", filter);
+      this.getRepositories(filter);
+    },
+    userFilter() {
+      var i;
+      for(i = 0; i < this.repositories.length; i++) {
+        if(this.repositories[i].organization_uuid === this.organization.organization_uuid)
+          this.users.push(this.getUser(this.repositories[i].user_uuid))
+      }
     }
   }
 };
 </script>
+
+<style scoped>
+</style>
