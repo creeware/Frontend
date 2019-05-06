@@ -1,12 +1,12 @@
 <template>
   <v-card flat>
-    <v-container fluid grid-list-lg>
+    <v-container v-if="isFilterShown" fluid grid-list-lg>
       <v-layout row wrap>
         <v-flex xs6>
           <v-autocomplete
             v-model="filter.organization_uuid"
             :disabled="isUpdating"
-            :items="organizations"
+            :items="minimal_organizations"
             @change="handleFilterChange"
             outline
             chips
@@ -60,6 +60,14 @@
               </v-list-tile-content>
             </template>
           </v-autocomplete>
+
+          <v-flex xs12>
+            <v-btn
+              v-if="isButtonShown"
+              class="bg-primary white--text"
+              @click="handleClearFilter"
+            >Clear Filter</v-btn>
+          </v-flex>
         </v-flex>
       </v-layout>
     </v-container>
@@ -71,10 +79,13 @@ export default {
   name: "OrganizationsFilter",
   props: {
     organizations: Array,
-    minimal_users: Array
+    minimal_users: Array,
+    minimal_organizations:Array,
+    isFilterShown: Boolean
   },
   data() {
     return {
+      isButtonShown: false,
       autoUpdate: true,
       isUpdating: false,
       filter: {
@@ -85,6 +96,15 @@ export default {
   },
   methods: {
     handleFilterChange() {
+      this.isButtonShown = true;
+      this.$emit("handle-filter-change", this.filter);
+    },
+    handleClearFilter() {
+      this.filter = {
+        organization_uuid: [],
+        user_uuid: []
+      };
+      this.isButtonShown = false;
       this.$emit("handle-filter-change", this.filter);
     },
     removeOrganization(item) {

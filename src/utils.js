@@ -7,12 +7,25 @@ export const jwtDecoder = token => {
 export function statusColorizer(status) {
   switch (status) {
     case "released":
-      return "bg-success text-black";
+      return "bg-primary";
     case "unreleased":
-      return "bg-success";
+      return "bg-danger";
     case "solved":
       return "bg-success";
+    case "failed":
+      return "red";
+    case "reset":
+      return "bg-grey";
     default:
       return "bg-info";
   }
+}
+
+export function getDate(dateString) {
+  var date = new Date(dateString);
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+
+  return year + "-" + month + "-" + day;
 }

@@ -9,6 +9,7 @@
         <organization-list
           :organizations="organizations"
           :minimal_users="minimal_users"
+          :minimal_organizations="minimal_organizations"
           @handle-filter-change="applyFilterChange"
         />
       </v-flex>
@@ -26,14 +27,17 @@ export default {
   name: "Organizations",
   beforeMount() {
     store.dispatch("getOrganizations", this.params).then(() => {
-      store.dispatch("getMinimalUsers").then(() => {
-        this.isListLoading = false;
+      store.dispatch("getMinimalOrganizations").then(() => {
+        store.dispatch("getMinimalUsers").then(() => {
+          this.isListLoading = false;
+        });
       });
     });
   },
   computed: mapState({
     organizations: state => state.organization.organizations,
-    minimal_users: state => state.user.minimal_users
+    minimal_users: state => state.user.minimal_users,
+    minimal_organizations: state => state.organization.minimal_organizations
   }),
   data() {
     return {
@@ -52,7 +56,7 @@ export default {
     ...mapActions(["getOrganizations"]),
     applyFilterChange(filter) {
       this.$emit("handle-filter-change", filter);
-      this.getOrganizations(filter)
+      this.getOrganizations(filter);
     }
   }
 };

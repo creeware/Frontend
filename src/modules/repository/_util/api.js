@@ -1,5 +1,5 @@
 export function apiGetRepositories(params) {
-    const url = `/api/repositories/list`;
+    const url = `/api/repositories/list/`;
     return axios.get(url, {params});
 }
 export function apiGetMinimalRepositories() {
