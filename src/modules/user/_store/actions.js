@@ -7,7 +7,7 @@ import {
 import * as TYPES from "@/store/types.js";
 
 const actions = {
-  getUsers({ commit, state }, params) {
+  getUsers({ commit }, params) {
     return new Promise((resolve, reject) => {
       apiGetUsers(params)
         .then(response => {
@@ -24,9 +24,9 @@ const actions = {
     });
   },
 
-  getMinimalUsers({ commit, state }, params) {
+  getMinimalUsers({ commit }) {
     return new Promise((resolve, reject) => {
-      apiGetMinimalUsers(params)
+      apiGetMinimalUsers()
         .then(response => {
           commit(TYPES.SET_MINIMAL_USERS, response.data);
           resolve(response);
