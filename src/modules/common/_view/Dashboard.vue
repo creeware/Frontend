@@ -1,28 +1,25 @@
 <template>
-  <el-container style="width: 100vw;">
-    <el-aside :class="sidebarCollapsed ? 'sidebar-collapsed': 'sidebar-not-collapsed'">
-      <sidebar
-        :isCollapsed="sidebarCollapsed"
-        @handle-collapse="sidebarCollapsed = !sidebarCollapsed"
-      />
-    </el-aside>
-    <el-main class="bg-grey main-container-view">
-      <transition name="el-fade-in">
-        <router-view class="transition-box"/>
-      </transition>
-    </el-main>
-  </el-container>
+<v-app class="bg-grey">
+  <v-content >
+    <v-container fluid>
+      <router-view />
+    </v-container> 
+  </v-content>
+  <bottom-nav/>
+</v-app>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import Sidebar from "../_component/Sidebar.vue";
+import BottomNav from "../_component/BottomNav.vue";
+import { jwtDecoder } from "@/utils";
+import store from "@/store";
 
 export default {
   name: "Dashboard",
   mounted() {},
   components: {
-    Sidebar
+    BottomNav
   },
   computed: {
     ...mapState({
@@ -36,7 +33,17 @@ export default {
   },
   props: {},
   methods: {
-    ...mapActions(["login"])
+    ...mapActions(["logout", "getProfile"]),
+
+    handleCollapse() {
+      this.sidebarCollapsed = !this.sidebarCollapsed;
+    }
+  },
+
+  beforeRouteEnter(to, from, next) {
+    const token = window.localStorage.getItem("vue-authenticate.access_token");
+    const profileId = jwtDecoder(token)["user_id"];
+    store.dispatch("getProfile", profileId).then(() => next());
   }
 };
 </script>

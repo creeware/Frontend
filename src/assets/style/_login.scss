@@ -1,0 +1,24 @@
+.login-container-view {
+  display: flex;
+  @include align-items(center);
+  @include justify-content(center);
+  text-align: center;
+}
+
+.login-card {
+  height: 30%;
+  width: 20%;
+}
+
+.login-container-item {
+  margin-top: 20px;
+}
+
+.text-black {
+  color: $white !important;
+}
+
+.text-large {
+  font-family: "Gugi", cursive !important;
+  font-size: 3em;
+}

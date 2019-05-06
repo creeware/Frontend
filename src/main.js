@@ -1,14 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Axios from "axios";
+import VueAxios from "vue-axios";
 import App from "./App.vue";
 import router from "./router";
 import { VueAuthenticate } from "vue-authenticate";
 import store from "@/store";
-import ElementUI from "element-ui";
 import "@/assets/style/app.scss";
-Vue.prototype.$http = Axios;
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
+import 'material-design-icons-iconfont/dist/material-design-icons.css' 
+
+window.axios = require("axios");
+
+Vue.prototype.$http = window.axios;
 Vue.prototype.$http.defaults.withCredentials = true;
+
+window.EventBus = new Vue();
 
 Vue.prototype.$http.interceptors.response.use(
   response => {
@@ -68,8 +75,11 @@ const vueAuthenticate = new VueAuthenticate(Vue.prototype.$http, {
   }
 });
 
+Vue.use(VueAxios, window.axios);
 Vue.use(Vuex);
-Vue.use(ElementUI);
+Vue.use(Vuetify, {
+  iconfont: "md"
+});
 
 Vue.config.productionTip = false;
 

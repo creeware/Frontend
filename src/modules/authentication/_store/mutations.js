@@ -1,6 +1,8 @@
+import * as TYPES from "@/store/types.js";
+
 const mutations = {
-  ["SET_AUTHENTICATED"](state, payload) {
-    state.isAuthenticated = payload.isAuthenticated;
+  [TYPES.SET_PROFILE](state, payload) {
+    state.profile = payload;
   }
 };
 

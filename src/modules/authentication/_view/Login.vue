@@ -1,14 +1,22 @@
 <template>
   <div class="bg-success background-box login-container-view">
-    <el-card class="container-card login-card" shadow="always">
-      <p class="login-container-item">CREEWARE</p>
-        <el-button class="login-container-item" @click="login('github')" type="primary" round>Login with Github</el-button>
-        <el-tooltip class="login-container-item" effect="dark" content="Coming Soon!" placement="bottom">
-            <div>
-            <el-button type="info" disabled round>Login with Canvas</el-button>
-            </div>
-        </el-tooltip>
-    </el-card>
+    <v-card>
+      <v-container
+        fluid
+        grid-list-lg
+      >
+      <p class="text-large">CREEWARE</p>
+        <v-btn round class="bg-primary" @click="login('github')" dark>Login with Github</v-btn >
+        <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <div v-on="on">
+              <v-btn class="bg-info" disabled round>Login with Canvas</v-btn>
+              </div>
+            </template>
+            <span>Coming Soon!</span>
+        </v-tooltip>
+      </v-container>
+    </v-card>
   </div>
 </template>
 
