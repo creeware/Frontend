@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export function apiGetRepositories(params) {
     const url = `/api/repositories/list/`;
     return axios.get(url, {params});
@@ -12,7 +13,7 @@ export function apiGetRepository(uuid) {
 }
 
 export function apiUpdateRepository(updatedRepository) {
-    const url = `/api/repositories/patch`;
+    const url = `/api/repositories/patch/`;
     return axios.patch(url, updatedRepository);
 }
 
@@ -22,6 +23,6 @@ export function apiDeleteRepository(uuid) {
 }
 
 export function apiCreateRepository(repository){
-    const url = `/api/repositories/post`
+    const url = `/api/repositories/post/`
     return axios.post(url, repository);
 }

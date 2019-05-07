@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   apiGetOrganizations,
   apiGetMinimalOrganizations,
@@ -9,7 +10,7 @@ import {
 import * as TYPES from "@/store/types.js";
 
 const actions = {
-  getOrganizations({ commit, state }, params) {
+  getOrganizations({ commit }, params) {
     return new Promise((resolve, reject) => {
       apiGetOrganizations(params)
         .then(response => {
@@ -26,7 +27,7 @@ const actions = {
     });
   },
 
-  getMinimalOrganizations({ commit, state }, params) {
+  getMinimalOrganizations({ commit }, params) {
     return new Promise((resolve, reject) => {
       apiGetMinimalOrganizations(params)
         .then(response => {
@@ -63,7 +64,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       apiImportOrganization(params)
         .then(response => {
-          commit(TYPES.SET_IMPORTED_ORGANIZATION, response.data);
+          commit(TYPES.SET_IMPORTED_REPOSITORIES, response.data);
           resolve(response);
         })
         .catch(error => reject(error));

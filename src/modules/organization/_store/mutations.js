@@ -18,6 +18,9 @@ const mutations = {
   },
   [TYPES.CLEAR_ORGANIZATIONS](state) {
     state.organizations = [];
+  },
+  [TYPES.SET_IMPORTED_REPOSITORIES](state, payload) {
+    state.imported_repositories = payload;
   }
 };
 
