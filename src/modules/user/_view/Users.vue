@@ -1,6 +1,14 @@
 <template>
   <v-container grid-list-md>
+    <v-snackbar color="bg-primary" v-model="snackbar" :top="true" :timeout="2000">
+      "Repository status updated!"
+      <v-btn color="bg-success" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-layout row wrap>
+      <v-flex xs8>olalal</v-flex>
+      <v-flex xs4>
+        <user-control-box @handle-invite-user="handleInviteUser"/>
+      </v-flex>
       <v-flex xs12>
         <user-list
           :users="users"
@@ -8,32 +16,19 @@
           @handle-filter-change="applyFilterChange"
         />
       </v-flex>
+      <invite-user
+        v-if="isInviteUserOpen"
+        :isModalOpen="isInviteUserOpen"
+        @invite-user="inviteNewUser"
+      />
     </v-layout>
   </v-container>
 </template>
-
-
-<!--<template>
-  <v-container grid-list-md>
-    <v-layout row wrap>
-      <v-flex xs8>olalal</v-flex>
-      <v-flex xs4>
-        <organization-control-box/>
-      </v-flex>
-      <v-flex xs12>
-        <organization-list
-          :organizations="organizations"
-          :minimal_users="minimal_users"
-          @handle-filter-change="applyFilterChange"
-        />
-      </v-flex>
-    </v-layout>
-  </v-container>
-</template>
--->
 
 <script>
-import UserList from "@/modules/user/_components/UserList.vue";
+import UserList from "../_components/UserList.vue";
+import UserControlBox from "../_components/UserControlBox";
+import InviteUser from "../_components/InviteUser";
 import store from "@/store";
 import { mapState, mapActions } from "vuex";
 
@@ -51,21 +46,31 @@ export default {
     minimal_users: state => state.user.minimal_users
   }),
   components: {
-    UserList
+    UserList,
+    UserControlBox,
+    InviteUser
   },
   data() {
     return {
       isListLoading: false,
+      isInviteUserOpen: false,
+      snackbar: false,
       params: {
         filter: undefined
       }
     };
   },
   methods: {
-    ...mapActions(["getMinimalUsers", "getUsers"]),
+    ...mapActions(["inviteUser", "getUsers"]),
     applyFilterChange(filter) {
       this.$emit("handle-filter-change", filter);
       this.getUsers(filter);
+    },
+    handleInviteUser() {
+      this.isInviteUserOpen = !this.isInviteUserOpen;
+    },
+    inviteNewUser(payload) {
+      this.inviteUser(payload);
     }
   }
 };

@@ -221,6 +221,7 @@ export default {
       if (index >= 0) this.payload.user_names.splice(index, 1);
     },
     handleCreateNewRepository(){
+        this.modalOpen = false;
         this.$emit("handle-create-new-repository", this.payload);
     }
   }

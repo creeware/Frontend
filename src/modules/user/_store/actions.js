@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   apiGetUsers,
   apiGetMinimalUsers,
@@ -46,16 +47,16 @@ const actions = {
     });
   },
 
-  updateUser({ commit }, payload) {
-    return new Promise((resolve, reject) => {
-      apiUpdateUser(payload)
-        .then(response => {
-          commit(TYPES.SET_USER, response.data);
-          resolve(response);
-        })
-        .catch(error => reject(error));
-    });
-  },
+  // updateUser({ commit }, payload) {
+  //   return new Promise((resolve, reject) => {
+  //     apiUpdateUser(payload)
+  //       .then(response => {
+  //         commit(TYPES.SET_USER, response.data);
+  //         resolve(response);
+  //       })
+  //       .catch(error => reject(error));
+  //   });
+  // },
 
   inviteUser({ commit }, params) {
     return new Promise((resolve, reject) => {
@@ -67,15 +68,15 @@ const actions = {
     });
   },
 
-  deleteUser(uuid) {
-    return new Promise((resolve, reject) => {
-      apiDeleteUser(uuid)
-        .then(response => {
-          resolve(response);
-        })
-        .catch(error => reject(error));
-    });
-  }
+  // deleteUser(uuid) {
+  //   return new Promise((resolve, reject) => {
+  //     apiDeleteUser(uuid)
+  //       .then(response => {
+  //         resolve(response);
+  //       })
+  //       .catch(error => reject(error));
+  //   });
+  // }
 };
 
 export default actions;

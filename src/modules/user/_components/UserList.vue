@@ -64,18 +64,6 @@
   </v-data-table>
 </template>
 
-<!--
-        <v-btn @click="toggle(panel)" dark small middle left relative>
-        <v-icon>search</v-icon>
-      </v-btn>
-      <v-expansion-panel v-model="panel" expand width: auto>
-        <v-expansion-panel-content v-for="(item,i) in items" :key="i">
-          <users-filter :users="users" :minimal_users="minimal_users" @handle-filter-change="handleFilterChange"/>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
--->
-
-
 <script>
 import UsersFilter from "./UsersFilter";
 

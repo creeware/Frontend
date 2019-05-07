@@ -13,7 +13,7 @@ export function apiGetUser(uuid) {
     return axios.get(url);
 }
 
-export function apiInviteUser(user){
+export function apiInviteUser(payload){
     const url = `/api/users/invite/`
-    return axios.post(url, user);
+    return axios.post(url, payload);
 }

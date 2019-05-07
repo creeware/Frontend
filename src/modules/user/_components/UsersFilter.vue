@@ -62,6 +62,13 @@
             </template>
           </v-autocomplete>
         </v-flex>
+        <v-flex xs6>
+            <v-btn
+              v-if="isButtonShown"
+              class="bg-primary white--text"
+              @click="handleClearFilter"
+            >Clear Filter</v-btn>
+          </v-flex>
       </v-layout>
     </v-container>
   </v-card>
@@ -78,6 +85,7 @@ export default {
     return {
       autoUpdate: true,
       isUpdating: false,
+      isButtonShown: false,
       filter: {
         user_uuid: [],
         user_role: []
@@ -87,6 +95,7 @@ export default {
   },
   methods: {
     handleFilterChange() {
+      this.isButtonShown = true;
       this.$emit("handle-filter-change", this.filter);
     },
     removeUser(item) {
@@ -98,7 +107,15 @@ export default {
       const index = this.filter.user_role.indexOf(item.title);
       if (index >= 0) this.filter.user_role.splice(index, 1);
       this.handleFilterChange();
-    }
+    },
+    handleClearFilter() {
+      this.filter = {
+        user_uuid: [],
+        user_role: []
+      };
+      this.isButtonShown = false;
+      this.$emit("handle-filter-change", this.filter);
+    },
   }
 };
 </script>

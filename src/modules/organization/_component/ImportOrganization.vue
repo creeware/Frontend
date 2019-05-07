@@ -32,6 +32,7 @@
                 <v-stepper-items flat>
                   <v-stepper-content step="1" flat>
                     <v-text-field
+                      color="grey darken-1"
                       v-model="organization_name"
                       placeholder="Please write the organization name"
                       :rules="nameRules"
@@ -60,6 +61,7 @@
                           </v-flex>
                           <v-flex xs12 sm6 d-flex>
                             <v-select
+                              color="grey darken-1"
                               :items="types"
                               v-model="repository.repository_type"
                               @change="handleStatusChange(index)"
