@@ -1,10 +1,12 @@
+/* eslint-disable */
+
 import {
   apiGetRepositories,
   apiGetMinimalRepositories,
   apiGetRepository,
   apiUpdateRepository,
   apiDeleteRepository,
-  apiCreateRepository
+  apiCreateRepository,
 } from "../_util/api";
 import * as TYPES from "@/store/types.js";
 
@@ -29,7 +31,7 @@ const actions = {
     });
   },
 
-  getMinimalRepositories({ commit, state }, params) {
+  getMinimalRepositories({ commit }, params) {
     return new Promise((resolve, reject) => {
       apiGetMinimalRepositories(params)
         .then(response => {
@@ -62,11 +64,10 @@ const actions = {
     });
   },
 
-  updateRepository({ commit }, payload) {
+  updateImportedRepository({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      apiCreateRepository(payload)
+      apiUpdateRepository(payload)
         .then(response => {
-          commit(TYPES.SET_REPOSITORY, response.data);
           resolve(response);
         })
         .catch(error => reject(error));
@@ -76,6 +77,38 @@ const actions = {
   deleteRepository(uuid) {
     return new Promise((resolve, reject) => {
       apiDeleteRepository(uuid)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  getSolutionRepositories({ commit, state }, params) {
+    return new Promise((resolve, reject) => {
+      apiGetRepositories(params)
+        .then(response => {
+          commit(TYPES.SET_SOLUTION_REPOSITORIES, response.data.data);
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  getTemplateRepositories({ commit, state }, params) {
+    return new Promise((resolve, reject) => {
+      apiGetRepositories(params)
+        .then(response => {
+          commit(TYPES.SET_TEMPLATE_REPOSITORIES, response.data.data);
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  createRepository({ commit }, repository) {
+    return new Promise((resolve, reject) => {
+      apiCreateRepository(repository)
         .then(response => {
           resolve(response);
         })

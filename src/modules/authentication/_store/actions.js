@@ -5,7 +5,7 @@ import * as TYPES from "@/store/types.js";
 import router from "../../../router";
 
 const actions = {
-  login({ commit, dispatch }, provider) {
+  login({ dispatch }, provider) {
     return new Promise((resolve, reject) => {
       vueAuthenticate
         .authenticate(provider)
@@ -15,7 +15,7 @@ const actions = {
             "vue-authenticate.access_token"
           );
           const profileId = jwtDecoder(token)["user_id"];
-          dispatch("getProfile", profileId).then(res => {
+          dispatch("getProfile", profileId).then(response => {
             router.push({ name: "dashboard" });
             resolve(response);
           });

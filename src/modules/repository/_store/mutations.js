@@ -13,6 +13,13 @@ const mutations = {
       last_page: payload.last_page
     };
   },
+  [TYPES.SET_SOLUTION_REPOSITORIES](state, payload) {
+    state.solution_repositories = payload;
+  },
+  [TYPES.SET_TEMPLATE_REPOSITORIES](state, payload) {
+    state.template_repositories = payload;
+  },
+
   [TYPES.SET_MINIMAL_REPOSITORIES](state, payload) {
     state.minimal_repositories = payload;
   },

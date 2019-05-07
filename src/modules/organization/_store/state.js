@@ -3,7 +3,7 @@ const state = {
     organizations: [],
     minimal_organizations: [],
     organizationsMeta: undefined,
-    imported_organization: undefined
+    imported_repositories: undefined
 };
 
 export default state;

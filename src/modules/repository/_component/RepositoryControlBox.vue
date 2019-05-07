@@ -3,7 +3,7 @@
     <v-container fluid grid-list-lg>
       <v-layout row wrap>
         <v-flex xm6>
-          <v-btn class="bg-primary white--text">Create a Challenge</v-btn>
+          <v-btn class="bg-primary white--text" @click="handleCreateRepository">Create a Challenge</v-btn>
         </v-flex>
 
         <v-flex xm6>
@@ -22,6 +22,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    handleCreateRepository(){
+      this.$emit("handle-create-repository");
+    }
   }
 };
 </script>
