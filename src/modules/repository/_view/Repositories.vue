@@ -1,7 +1,9 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs8>olalal</v-flex>
+      <v-flex xs8><v-card>
+          PLACEHOLDER
+        </v-card></v-flex>
       <v-flex xs4>
         <repository-control-box @handle-create-repository="handleCreateRepository"/>
       </v-flex>

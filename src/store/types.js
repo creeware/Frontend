@@ -1,6 +1,6 @@
 // Profile Store Types
 export const SET_PROFILE = "SET_PROFILE";
-
+export const SET_PROFILE_STATISTICS = "SET_PROFILE_STATISTICS";
 // Organization Store Types
 export const SET_ORGANIZATION = "SET_ORGANIZATION";
 export const SET_IMPORTED_REPOSITORIES = "SET_IMPORTED_REPOSITORIES";

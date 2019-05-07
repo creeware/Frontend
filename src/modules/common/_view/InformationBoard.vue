@@ -11,6 +11,17 @@
           @handle-edit-profile="handleEditProfile"
         />
       </v-flex>
+      <v-flex xs4>
+        <profile-statistics :profile_statistics="profile_statistics"/>
+      </v-flex>
+      <v-flex xs4>
+        <latest-organization :organization="profile_statistics.latestOrganization"/>
+      </v-flex>
+      <v-flex xs12>
+        <due-date-closing-repositories-list
+          :repositories="profile_statistics.dueDateClosingRepositories"
+        />
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -18,6 +29,10 @@
 <script>
 import Profile from "../_component/Profile";
 import EditProfile from "../_component/EditProfile";
+import ProfileStatistics from "../_component/ProfileStatistics";
+import DueDateClosingRepositoriesList from "../_component/DueDateClosingRepositoriesList";
+import LatestOrganization from "../_component/LatestOrganization";
+
 import { mapState, mapActions } from "vuex";
 import store from "@/store";
 
@@ -31,10 +46,14 @@ export default {
   },
   components: {
     Profile,
-    EditProfile
+    EditProfile,
+    ProfileStatistics,
+    DueDateClosingRepositoriesList,
+    LatestOrganization
   },
   computed: mapState({
-    profile: state => state.authentication.profile
+    profile: state => state.authentication.profile,
+    profile_statistics: state => state.authentication.profile_statistics
   }),
   methods: {
     ...mapActions(["updateProfile"]),
