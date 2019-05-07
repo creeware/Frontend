@@ -8,7 +8,7 @@
           <v-layout column>
             <v-flex align-self-center>
               <v-card-text>
-                <v-avatar size="16em" tile class="hidden-md-and-down">
+                <v-avatar size="16em" tile class="hidden-sm-and-down">
                   <v-img :src="profile.avatar_url" fit="cover"></v-img>
                 </v-avatar>
                 <v-avatar size="16em" class="hidden-md-and-up">
