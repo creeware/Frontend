@@ -19,10 +19,10 @@ export default {
     handleClose(done) {
       // INVESTIGATE THIS WARNING
       this.$confirm("Are you sure to close this dialog?")
-        .then(_ => {
+        .then(() => {
           done();
         })
-        .catch(_ => {});
+        .catch(() => {});
     }
   }
 };

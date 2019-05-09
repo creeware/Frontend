@@ -7,6 +7,7 @@ export function apiGetMinimalRepositories() {
     const url = `/api/repositories/minimal_list/`;
     return axios.get(url);
 }
+
 export function apiGetRepository(uuid) {
     const url = `/api/repositories/${uuid}`;
     return axios.get(url, uuid);
@@ -25,4 +26,19 @@ export function apiDeleteRepository(uuid) {
 export function apiCreateRepository(repository){
     const url = `/api/repositories/post/`
     return axios.post(url, repository);
+}
+
+export function apiGetCanvasCourses(uuid) {
+    const url = `/api/canvas/courses/${uuid}`;
+    return axios.get(url, uuid);
+}
+
+export function apiGetCanvasStudents(params) {
+    const url = `/api/canvas/students/`;
+    return axios.get(url, { params });
+}
+
+export function apiCreateCanvasAssignment(payload){
+    const url = `/api/canvas/repository/`
+    return axios.post(url, payload);
 }

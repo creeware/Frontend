@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export function apiGetUsers(params) {
     const url = `/api/users/list/`;
     return axios.get(url, {params});

@@ -1,6 +1,13 @@
+/* eslint-disable no-empty-pattern */
 import { vueAuthenticate } from "@/main.js";
 import { jwtDecoder } from "@/utils";
-import { apiGetProfile, apiUpdateProfile, apiGetProfileStatistics} from "../_util/api";
+import {
+  apiGetProfile,
+  apiUpdateProfile,
+  apiGetProfileStatistics,
+  apiCanvasMigration,
+  apiCanvasIntegration
+} from "../_util/api";
 import * as TYPES from "@/store/types.js";
 import router from "../../../router";
 
@@ -67,9 +74,27 @@ const actions = {
         })
         .catch(error => reject(error));
     });
+  },
+
+  canvasMigration({}, payload) {
+    return new Promise((resolve, reject) => {
+      apiCanvasMigration(payload)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  canvasIntegration({}, payload) {
+    return new Promise((resolve, reject) => {
+      apiCanvasIntegration(payload)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
   }
-
-
 };
 
 export default actions;

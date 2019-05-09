@@ -55,6 +55,7 @@ export default {
         case "organizations":
           return "green darken-1";
       }
+      return "white"
     }
   },
   methods: {

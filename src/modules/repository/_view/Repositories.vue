@@ -1,11 +1,12 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs8><v-card>
-          PLACEHOLDER
-        </v-card></v-flex>
-      <v-flex xs4>
-        <repository-control-box @handle-create-repository="handleCreateRepository"/>
+      <v-flex xs4>olalal</v-flex>
+      <v-flex xs8>
+        <repository-control-box
+          @handle-create-repository="handleCreateRepository"
+          @handle-create-canvas-assignment="handleCreateCanvasAssignment"
+        />
       </v-flex>
       <v-flex xs12>
         <repository-list
@@ -29,15 +30,33 @@
         @handle-create-repository="handleCreateRepository"
         @handle-create-new-repository="createNewRepository"
       />
+      <create-new-canvas-assignment
+        v-if="isCreateCanvasAssignmentOpen"
+        :isDialogOpen="isCreateCanvasAssignmentOpen"
+        :repositoriesLoading="repositoriesLoading"
+        :profile="profile"
+        :minimal_users="minimal_users"
+        :minimal_organizations="minimal_organizations"
+        :solution_repositories="solution_repositories"
+        :template_repositories="template_repositories"
+        :canvas_courses="canvas_courses"
+        :canvas_students="canvas_students"
+        @handle-filter-change="handleFilterChange"
+        @handle-canvas-filter-change="handleCanvasFilterChange"
+        @handle-create-new-canvas-assignment="handleCreateNewAssignment"
+        @handle-create-canvas-assignment="handleCreateCanvasAssignment"
+      />
     </v-layout>
   </v-container>
 </template>
 
 <script>
+/* eslint-disable no-undef */
 import RepositoryList from "../_component/RepositoryList";
 import CreateNewRepository from "../_component/CreateNewRepository";
 import RepositoryControlBox from "../_component/RepositoryControlBox";
 import { mapState, mapActions } from "vuex";
+import CreateNewCanvasAssignment from "../_component/CreateNewCanvasAssignment";
 import store from "@/store";
 
 export default {
@@ -47,7 +66,9 @@ export default {
       store.dispatch("getMinimalRepositories").then(() => {
         store.dispatch("getMinimalOrganizations").then(() => {
           store.dispatch("getMinimalUsers").then(() => {
-            this.isListLoading = false;
+            store.dispatch("getCanvasCourses", this.profile.user_uuid).then(() => {
+              this.isListLoading = false;
+            })
           });
         });
       });
@@ -60,13 +81,16 @@ export default {
     template_repositories: state => state.repository.template_repositories,
     minimal_users: state => state.user.minimal_users,
     minimal_organizations: state => state.organization.minimal_organizations,
-    minimal_repositories: state => state.repository.minimal_repositories
+    minimal_repositories: state => state.repository.minimal_repositories,
+    canvas_courses: state => state.repository.canvas_courses,
+    canvas_students: state => state.repository.canvas_students
   }),
   data() {
     return {
       isListLoading: false,
       repositoriesLoading: false,
       isCreateRepositoryOpen: false,
+      isCreateCanvasAssignmentOpen: false,
       params: {
         filter: undefined
       }
@@ -75,14 +99,19 @@ export default {
   components: {
     RepositoryList,
     RepositoryControlBox,
-    CreateNewRepository
+    CreateNewRepository,
+    CreateNewCanvasAssignment
   },
   methods: {
     ...mapActions([
       "getRepositories",
       "getTemplateRepositories",
       "getSolutionRepositories",
-      "createRepository"
+      "createRepository",
+      "createNewCanvasRepository",
+      "getCanvasCourses",
+      "getCanvasStudents",
+      "createCanvasRepository"
     ]),
     handleFilterChange(solutionFilter, templateFilter) {
       this.repositoriesLoading = true;
@@ -92,6 +121,13 @@ export default {
         });
       });
     },
+    handleCanvasFilterChange(studentsFilter){
+      this.repositoriesLoading = true;
+        this.getCanvasStudents(studentsFilter).then(() => {
+          EventBus.$emit("students-loaded");
+          this.repositoriesLoading = false;
+        });
+    },
     applyFilterChange(filter) {
       this.$emit("handle-filter-change", filter);
       this.getRepositories(filter);
@@ -99,9 +135,15 @@ export default {
     handleCreateRepository() {
       this.isCreateRepositoryOpen = !this.isCreateRepositoryOpen;
     },
-    createNewRepository(repository){
-      this.createRepository(repository)
-    }
+    createNewRepository(repository) {
+      this.createRepository(repository);
+    },
+    handleCreateCanvasAssignment() {
+      this.isCreateCanvasAssignmentOpen = !this.isCreateCanvasAssignmentOpen;
+    },
+    handleCreateNewAssignment(repository) {
+      this.createCanvasRepository(repository);
+    },
   }
 };
 </script>
