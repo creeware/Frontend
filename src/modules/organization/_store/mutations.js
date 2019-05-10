@@ -21,6 +21,9 @@ const mutations = {
   },
   [TYPES.SET_IMPORTED_REPOSITORIES](state, payload) {
     state.imported_repositories = payload;
+  },
+  [TYPES.CLEAR_IMPORTED_REPOSITORIES](state) {
+    state.imported_repositories = [];
   }
 };
 

@@ -61,6 +61,7 @@ const actions = {
   },
 
   importOrganization({ commit }, params) {
+    commit(TYPES.CLEAR_IMPORTED_REPOSITORIES)
     return new Promise((resolve, reject) => {
       apiImportOrganization(params)
         .then(response => {
