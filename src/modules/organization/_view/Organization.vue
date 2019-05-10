@@ -3,12 +3,23 @@
     <v-layout class="">
       <v-flex xs4>
         <organization-card class="mb-2" v-if="hasLoaded" :organization="organization"/>
+        <v-card v-if="hasLoaded" color="cyan darken-1">
+          <v-card-title class="title">
+            <span class="white--text">
+                <v-icon class="white--text">person</v-icon>
+                Owner
+            </span>
+          </v-card-title>
+        </v-card>
         <profile :profile="user" v-if="hasLoaded" />
       </v-flex>
       <v-flex xs8 class="ml-2">
         <v-card v-if="hasLoaded" color="red">
           <v-card-title class="title">
-            Repositories
+            <span class="white--text">
+                <v-icon class="white--text">folder</v-icon>
+                Repositories
+            </span>
           </v-card-title>
         </v-card>
         <repository-list
@@ -67,7 +78,6 @@ export default {
     minimal_users: state => state.user.minimal_users
   }),
   components: {
-    //OrganizationNameBox,
     //UserProfile,
     OrganizationCard,
     RepositoryList,

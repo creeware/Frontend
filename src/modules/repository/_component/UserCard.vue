@@ -1,7 +1,10 @@
 <template>
     <v-card color="blue" class="mb-2">
         <v-card-title class="title">
-            User
+            <span class="white--text">
+                <v-icon class="white--text">person</v-icon>
+                Admin
+            </span>
         </v-card-title>
         <v-card-text class="white text--primary">
             <v-layout>

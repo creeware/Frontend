@@ -7,8 +7,12 @@
         :icon="item.icon"
         >
             <v-card :color="item.color">
-                <v-card-title class="title">{{ item.title }}</v-card-title>
-                <v-card-text class="white text--primary">{{ item.text }}</v-card-text>
+                <v-card-title class="title">
+                    <span class="white--text">{{ item.title }}</span>
+                </v-card-title>
+                <v-card-text class="white text--primary">
+                    <span class="subheading">{{ item.text }}</span>
+                </v-card-text>
             </v-card>
         </v-timeline-item>
     </v-timeline>
