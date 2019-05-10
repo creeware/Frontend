@@ -2,13 +2,34 @@
   <v-container grid-list-md>
     <v-layout row wrap>
       <v-flex xs4>
-        <profile :profile="profile" @handle-edit-profile="handleEditProfile"/>
+        <profile
+          :profile="profile"
+          @handle-edit-profile="handleEditProfile"
+          @handle-integrate-canvas="handleIntegrateCanvasAccount"
+          @handle-accept-canvas-invitation="handleAcceptCanvasInvitation"
+        />
         <edit-profile
           v-if="isEditProfileOpen"
           :profile="profile"
           :isModalOpen="isEditProfileOpen"
           @update-profile="handleUpdateProfile"
           @handle-edit-profile="handleEditProfile"
+        />
+
+        <integrate-canvas
+          v-if="isIntegrateCanvasOpen"
+          :profile="profile"
+          :isModalOpen="isIntegrateCanvasOpen"
+          @handle-canvas-integration="handleCanvasIntegration"
+          @handle-integrate-canvas="handleIntegrateCanvasAccount"
+        />
+
+        <accept-canvas
+          v-if="isAcceptCanvasOpen"
+          :profile="profile"
+          :isModalOpen="isAcceptCanvasOpen"
+          @handle-canvas-migration="handleCanvasMigration"
+          @handle-accept-canvas="handleAcceptCanvasInvitation"
         />
       </v-flex>
       <v-flex xs4>
@@ -32,16 +53,18 @@ import EditProfile from "../_component/EditProfile";
 import ProfileStatistics from "../_component/ProfileStatistics";
 import DueDateClosingRepositoriesList from "../_component/DueDateClosingRepositoriesList";
 import LatestOrganization from "../_component/LatestOrganization";
-
+import IntegrateCanvas from "../_component/IntegrateCanvas";
+import AcceptCanvas from "../_component/AcceptCanvas";
 import { mapState, mapActions } from "vuex";
-import store from "@/store";
 
 export default {
   name: "InformationBoard",
   mounted() {},
   data() {
     return {
-      isEditProfileOpen: false
+      isEditProfileOpen: false,
+      isIntegrateCanvasOpen: false,
+      isAcceptCanvasOpen: false
     };
   },
   components: {
@@ -49,19 +72,33 @@ export default {
     EditProfile,
     ProfileStatistics,
     DueDateClosingRepositoriesList,
-    LatestOrganization
+    LatestOrganization,
+    IntegrateCanvas,
+    AcceptCanvas
   },
   computed: mapState({
     profile: state => state.authentication.profile,
     profile_statistics: state => state.authentication.profile_statistics
   }),
   methods: {
-    ...mapActions(["updateProfile"]),
+    ...mapActions(["updateProfile", "canvasIntegration", "canvasMigration"]),
     handleEditProfile() {
       this.isEditProfileOpen = !this.isEditProfileOpen;
     },
     handleUpdateProfile(updatedProfile) {
       this.updateProfile(updatedProfile);
+    },
+    handleIntegrateCanvasAccount() {
+      this.isIntegrateCanvasOpen = !this.isIntegrateCanvasOpen;
+    },
+    handleCanvasIntegration(payload) {
+      this.canvasIntegration(payload);
+    },
+    handleAcceptCanvasInvitation() {
+      this.isAcceptCanvasOpen = !this.isAcceptCanvasOpen;
+    },
+    handleCanvasMigration(payload) {
+      this.canvasMigration(payload);
     }
   }
 };

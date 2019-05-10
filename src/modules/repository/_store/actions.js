@@ -7,14 +7,14 @@ import {
   apiUpdateRepository,
   apiDeleteRepository,
   apiCreateRepository,
+  apiGetCanvasCourses,
+  apiGetCanvasStudents,
+  apiCreateCanvasAssignment,
 } from "../_util/api";
 import * as TYPES from "@/store/types.js";
 
 const actions = {
-  getRepositories({ commit, state }, params) {
-    if (state.repositories.page_size !== params.page_size) {
-      commit(TYPES.CLEAR_REPOSITORIES);
-    }
+  getRepositories({ commit }, params) {
     return new Promise((resolve, reject) => {
       apiGetRepositories(params)
         .then(response => {
@@ -114,7 +114,39 @@ const actions = {
         })
         .catch(error => reject(error));
     });
-  }
+  },
+
+  getCanvasCourses({ commit }, uuid) {
+    return new Promise((resolve, reject) => {
+      apiGetCanvasCourses(uuid)
+        .then(response => {
+          commit(TYPES.SET_CANVAS_COURSES, response.data);
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  getCanvasStudents({ commit }, params) {
+    return new Promise((resolve, reject) => {
+      apiGetCanvasStudents(params)
+        .then(response => {
+          commit(TYPES.SET_CANVAS_STUDENTS, response.data);
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  createCanvasRepository({ }, repository) {
+    return new Promise((resolve, reject) => {
+      apiCreateCanvasAssignment(repository)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
 };
 
 export default actions;

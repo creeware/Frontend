@@ -25,6 +25,12 @@ const mutations = {
   },
   [TYPES.CLEAR_REPOSITORIES](state) {
     state.repositories = [];
+  },
+  [TYPES.SET_CANVAS_COURSES](state, payload){
+    state.canvas_courses = payload;
+  },
+  [TYPES.SET_CANVAS_STUDENTS](state, payload) {
+    state.canvas_students = payload;
   }
 };
 export default mutations;

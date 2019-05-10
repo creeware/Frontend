@@ -41,19 +41,22 @@ export default {
   name: "EditProfile",
   mounted() {
     this.modalOpen = this.isModalOpen;
-    this.updatedProfile = {...this.profile};
+    this.updatedProfile = { ...this.profile };
   },
   computed: {},
   props: {
     isModalOpen: Boolean,
-    profile: Object
+    profile: {
+      user_display_name: undefined,
+      user_email: undefined
+    }
   },
   data() {
     return {
       modalOpen: false,
       updatedProfile: {
         user_display_name: undefined,
-        user_email: undefined,
+        user_email: undefined
       },
       valid: true,
       name: "",
@@ -74,9 +77,9 @@ export default {
     },
     updateProfile() {
       if (this.$refs.form.validate()) {
-          this.$emit("update-profile", this.updatedProfile);
-          this.handleEditProfile();
-        }
+        this.$emit("update-profile", this.updatedProfile);
+        this.handleEditProfile();
+      }
     }
   }
 };

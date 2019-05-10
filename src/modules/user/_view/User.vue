@@ -5,7 +5,7 @@
 <script>
 import UserProfile from '@/modules/user/_components/UserProfile';
 import store from "@/store";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "user",
