@@ -1,7 +1,9 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs4>olalal</v-flex>
+      <v-flex xs4>
+        <repository-chart/>
+      </v-flex>
       <v-flex xs8>
         <repository-control-box
           @handle-create-repository="handleCreateRepository"
@@ -55,6 +57,7 @@
 import RepositoryList from "../_component/RepositoryList";
 import CreateNewRepository from "../_component/CreateNewRepository";
 import RepositoryControlBox from "../_component/RepositoryControlBox";
+import RepositoryChart from "../_component/RepositoryChart";
 import { mapState, mapActions } from "vuex";
 import CreateNewCanvasAssignment from "../_component/CreateNewCanvasAssignment";
 import store from "@/store";
@@ -101,7 +104,8 @@ export default {
     RepositoryList,
     RepositoryControlBox,
     CreateNewRepository,
-    CreateNewCanvasAssignment
+    CreateNewCanvasAssignment,
+    RepositoryChart
   },
   methods: {
     ...mapActions([
