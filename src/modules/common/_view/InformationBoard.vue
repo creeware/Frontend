@@ -36,7 +36,7 @@
         <profile-statistics :profile_statistics="profile_statistics"/>
       </v-flex>
       <v-flex xs4>
-        <latest-organization :organization="profile_statistics.latestOrganization"/>
+        <latest-organization v-if="profile_statistics.latestOrganization" :organization="profile_statistics.latestOrganization"/>
       </v-flex>
       <v-flex xs12>
         <due-date-closing-repositories-list

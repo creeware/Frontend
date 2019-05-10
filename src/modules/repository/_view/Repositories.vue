@@ -66,9 +66,10 @@ export default {
       store.dispatch("getMinimalRepositories").then(() => {
         store.dispatch("getMinimalOrganizations").then(() => {
           store.dispatch("getMinimalUsers").then(() => {
-            store.dispatch("getCanvasCourses", this.profile.user_uuid).then(() => {
-              this.isListLoading = false;
-            })
+            if (this.profile.canvas_access_token) {
+              store.dispatch("getCanvasCourses", this.profile.user_uuid);
+            }
+            this.isListLoading = false;
           });
         });
       });
@@ -121,12 +122,12 @@ export default {
         });
       });
     },
-    handleCanvasFilterChange(studentsFilter){
+    handleCanvasFilterChange(studentsFilter) {
       this.repositoriesLoading = true;
-        this.getCanvasStudents(studentsFilter).then(() => {
-          EventBus.$emit("students-loaded");
-          this.repositoriesLoading = false;
-        });
+      this.getCanvasStudents(studentsFilter).then(() => {
+        EventBus.$emit("students-loaded");
+        this.repositoriesLoading = false;
+      });
     },
     applyFilterChange(filter) {
       this.$emit("handle-filter-change", filter);
@@ -143,7 +144,7 @@ export default {
     },
     handleCreateNewAssignment(repository) {
       this.createCanvasRepository(repository);
-    },
+    }
   }
 };
 </script>
