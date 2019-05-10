@@ -41,16 +41,16 @@
 </template>
 
 <script>
-import { roleColorizer } from "@/utils.js"
+import { roleColorizer } from "@/utils.js";
 export default {
-    name: "UserCard",
-    props: {
-        user: Object,
-        color: String
-    },
-    methods:{
-        roleColorizer
-    }
-}
+  name: "UserCard",
+  props: {
+    user: Object,
+    color: String
+  },
+  methods: {
+    roleColorizer
+  }
+};
 </script>
 >

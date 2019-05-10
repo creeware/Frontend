@@ -29,7 +29,7 @@
             return{
                 items: [
                     {color: "info", icon: "publish", title: "Released on:", text: getDate(this.$props.repository.release_date)},
-                    {color: "success", icon: "send", title: "Submitted on:", text: this.submissionDate(this.$props.repository)},
+                    {color: "success", icon: "done", title: "Submitted on:", text: this.submissionDate(this.$props.repository)},
                     {color: "warning", icon: "access_alarm", title: "Due date:", text: getDate(this.$props.repository.due_date)}
                 ]
             }

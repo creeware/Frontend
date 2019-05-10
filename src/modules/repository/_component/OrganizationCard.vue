@@ -34,11 +34,11 @@
 </template>
 
 <script>
-    export default {
-        name: "OrganizationCard",
-        props: {
-            organization: Object,
-            color: String
-        }
-    }
+export default {
+  name: "OrganizationCard",
+  props: {
+    organization: Object,
+    color: String
+  }
+};
 </script>
