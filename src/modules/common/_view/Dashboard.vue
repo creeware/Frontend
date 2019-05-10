@@ -1,12 +1,12 @@
 <template>
-<v-app class="bg-grey">
-  <v-content >
-    <v-container fluid>
-      <router-view />
-    </v-container> 
-  </v-content>
-  <bottom-nav/>
-</v-app>
+  <v-app class="bg-grey">
+    <v-content>
+      <v-container fluid>
+        <router-view/>
+      </v-container>
+    </v-content>
+    <bottom-nav/>
+  </v-app>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ export default {
   },
   props: {},
   methods: {
-    ...mapActions(["logout", "getProfile"]),
+    ...mapActions(["logout", "getProfile", "getProfileStatistics"]),
 
     handleCollapse() {
       this.sidebarCollapsed = !this.sidebarCollapsed;
@@ -43,7 +43,9 @@ export default {
   beforeRouteEnter(to, from, next) {
     const token = window.localStorage.getItem("vue-authenticate.access_token");
     const profileId = jwtDecoder(token)["user_id"];
-    store.dispatch("getProfile", profileId).then(() => next());
+    store
+      .dispatch("getProfile", profileId)
+      .then(() => store.dispatch("getProfileStatistics", profileId).then(() => next()));
   }
 };
 </script>

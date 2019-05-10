@@ -10,7 +10,11 @@
       <v-btn color=bg-success flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
     <v-layout row wrap>
-      <v-flex xs8>olalal</v-flex>
+      <v-flex xs8>
+        <v-card>
+          PLACEHOLDER
+        </v-card>
+      </v-flex>
       <v-flex xs4>
         <organization-control-box @handle-import-organization="handleImportOrganization"/>
       </v-flex>

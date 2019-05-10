@@ -1,6 +1,6 @@
 import { vueAuthenticate } from "@/main.js";
 import { jwtDecoder } from "@/utils";
-import { apiGetProfile, apiUpdateProfile } from "../_util/api";
+import { apiGetProfile, apiUpdateProfile, apiGetProfileStatistics} from "../_util/api";
 import * as TYPES from "@/store/types.js";
 import router from "../../../router";
 
@@ -41,6 +41,17 @@ const actions = {
       apiGetProfile(uuid)
         .then(response => {
           commit(TYPES.SET_PROFILE, response.data);
+          resolve(response);
+        })
+        .catch(error => reject(error));
+    });
+  },
+
+  getProfileStatistics({ commit }, uuid) {
+    return new Promise((resolve, reject) => {
+      apiGetProfileStatistics(uuid)
+        .then(response => {
+          commit(TYPES.SET_PROFILE_STATISTICS, response.data);
           resolve(response);
         })
         .catch(error => reject(error));

@@ -1,6 +1,7 @@
 <template>
   <v-card color="white" class="black--text gugi-text">
-    <v-layout row>
+    <v-container grid-list-md>
+    <v-layout align-center justify-center row fill-height>
       <v-flex xs7>
         <v-card-title primary-title>
           <div>
@@ -38,6 +39,7 @@
         </v-flex>
         </v-layout>
     </v-card-actions>
+    </v-container>
   </v-card>
 </template>
 
