@@ -15,7 +15,7 @@
           >{{ props.item.user_display_name }}</router-link>
         </td>
         <td>{{ props.item.user_email }}</td>
-        <td>{{ props.item.user_role }}</td>
+        <td><v-chip :color="roleColorizer(props.item.user_role)" text-color="white">{{ props.item.user_role.toUpperCase() }}</v-chip></td>
       </tr>
     </template>
     <template v-slot:expand="props">
@@ -66,6 +66,7 @@
 
 <script>
 import UsersFilter from "./UsersFilter";
+import { roleColorizer } from "@/utils.js"
 
 export default {
   name: "UserList",
@@ -101,6 +102,7 @@ export default {
     };
   },
   methods: {
+    roleColorizer,
     handleFilterChange(filter) {
       this.$emit("handle-filter-change", filter);
     },
