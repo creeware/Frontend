@@ -1,7 +1,10 @@
 <template>
     <v-card color="green">
         <v-card-title class="title">
-            Organization
+            <span class="white--text">
+                <v-icon class="white--text">domain</v-icon>
+                Organization
+            </span>
         </v-card-title>
         <v-card-text class="white text--primary">
             <b>{{"Name: "}}</b><router-link class="link-item" :to="'/organizations/'+organization.organization_uuid">{{organization.organization_name}}</router-link><br>

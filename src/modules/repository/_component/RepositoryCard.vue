@@ -1,6 +1,11 @@
 <template>
     <v-card class="mb-2" :color="color">
-        <v-card-title class="title">{{ "Repository" }}</v-card-title>
+        <v-card-title class="title">
+            <span class="white--text">
+                <v-icon class="white--text">folder</v-icon>
+                Repository
+            </span>
+        </v-card-title>
         <v-card-text class="white text--primary">
             <b>{{ "GitHub: "}}</b>
                 <a
