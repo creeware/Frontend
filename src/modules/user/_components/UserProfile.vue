@@ -1,17 +1,17 @@
 <template>
   <!-- Main container -->
-  <v-container grid-list-md roboto-text>
+  <!--v-container grid-list-md roboto-text-->
     <v-card>
       <v-layout row wrap>
-        <v-flex md12 lg3 align-self-center>
+        <v-flex xs12 sm12 md3 lg3 align-self-center>
           <!-- Profile picture container -->
           <v-layout column>
             <v-flex align-self-center>
               <v-card-text>
-                <v-avatar size="16em" tile class="hidden-sm-and-down">
+                <v-avatar size="16em" tile class="hidden-xs-only">
                   <v-img :src="profile.avatar_url" fit="cover"></v-img>
                 </v-avatar>
-                <v-avatar size="16em" class="hidden-md-and-up">
+                <v-avatar size="16em" class="hidden-sm-and-up">
                   <v-img :src="profile.avatar_url" fit="cover"></v-img>
                 </v-avatar>
               </v-card-text>
@@ -19,7 +19,7 @@
           </v-layout>
         </v-flex>
 
-        <v-flex md12 lg9>
+        <v-flex xs12 sm12 md9 lg9>
           <!-- Profile info container -->
           <v-layout column>
             <v-flex>
@@ -64,7 +64,7 @@
         </v-flex>
       </v-layout>
     </v-card>
-  </v-container>
+  <!--/v-container-->
 </template>
 
 <script>
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style>
-@media (min-width: 1264px) {
+@media (min-width: 1904px) {
   .v-card-text-pl-fix {
     padding-left: 0 !important;
     padding-right: 0 !important;

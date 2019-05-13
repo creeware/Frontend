@@ -16,7 +16,8 @@
           :minimal_organizations="[organization]"
           :minimal_repositories="[repositories]"
           @handle-filter-change="applyFilterChange"
-        />
+          :filterable="false"
+          />
         <v-layout>
           <v-flex xs4>
             <organization-card v-if="hasLoaded" :organization="organization"/>

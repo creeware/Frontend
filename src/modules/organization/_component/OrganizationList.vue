@@ -23,7 +23,7 @@
         <v-card-text>{{ props.item.organization_description }}</v-card-text>
       </v-card>
     </template>
-    <template v-slot:footer>
+    <template v-slot:footer v-if="filterable">
       <td :colspan="headers.length">
         <organizations-filter
           :organizations="organizations"
@@ -76,7 +76,8 @@ export default {
   props: {
     organizations: Array,
     minimal_users: Array,
-    minimal_organizations: Array
+    minimal_organizations: Array,
+    filterable: Boolean
   },
   data() {
     return {
