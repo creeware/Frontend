@@ -38,12 +38,15 @@
               small
             >Edit Profile</v-btn>
           </v-flex>
-          <v-flex v-if="this.profile.user_role === 'user'" xm12>
+          <v-flex v-if="this.profile.user_role === 'user'" xs8>
             <v-btn
               @click="handleAcceptCanvasInvitation"
               class="bg-primary white--text roboto-text"
               small
             >Canvas Invitation</v-btn>
+          </v-flex>
+          <v-flex v-if="this.profile.user_role === 'user'" xm4>
+            <v-btn @click="handleLogout" class="bg-primary white--text roboto-text" small>Logout</v-btn>
           </v-flex>
         </v-layout>
       </v-card-actions>
@@ -71,6 +74,9 @@ export default {
     },
     handleAcceptCanvasInvitation() {
       this.$emit("handle-accept-canvas-invitation");
+    },
+    handleLogout() {
+      this.$emit("handle-logout");
     }
   }
 };

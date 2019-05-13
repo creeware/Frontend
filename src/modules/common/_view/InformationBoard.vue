@@ -7,6 +7,7 @@
           @handle-edit-profile="handleEditProfile"
           @handle-integrate-canvas="handleIntegrateCanvasAccount"
           @handle-accept-canvas-invitation="handleAcceptCanvasInvitation"
+          @handle-logout="logout"
         />
         <edit-profile
           v-if="isEditProfileOpen"
@@ -81,7 +82,7 @@ export default {
     profile_statistics: state => state.authentication.profile_statistics
   }),
   methods: {
-    ...mapActions(["updateProfile", "canvasIntegration", "canvasMigration"]),
+    ...mapActions(["updateProfile", "canvasIntegration", "canvasMigration", "logout"]),
     handleEditProfile() {
       this.isEditProfileOpen = !this.isEditProfileOpen;
     },
