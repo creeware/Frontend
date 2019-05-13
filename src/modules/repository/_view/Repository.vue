@@ -70,36 +70,6 @@
                 snackbar: false,
                 snackbarMessage: "",
                 snackbarColor: ""
-/*                 repository: {
-                    repository_uuid: "repo123",
-                    repository_name: "Challenge",
-                    repository_description: "This is a repository",
-                    repository_git_url: "https://github.com/creeware/frontend",
-                    repository_submission_date: undefined,
-                    repository_status: "Not Completed",
-                    release_date: "2019-05-06",
-                    due_date: "2019-05-07",
-                    user_name: "test_user",
-                    try_count: undefined,
-                    unlimited: true
-                }, */
-                // user: {
-                //     user_uuid: "user123",
-                //     user_display_name: "Pontus Asp",
-                //     user_email: "poasp@kth.se",
-                //     user_role: "Master",
-                //     username: "Pontusblue",
-                //     avatar_url: "https://avatars3.githubusercontent.com/u/18573650?s=400&v=4",
-                //     profile_url: "https://github.com/",
-                //     user_bio: "I am a user."
-                // },
- /*                organization: {
-                    organization_uuid: "org123",
-                    organization_name: "Creeware",
-                    company_name: "KTH",
-                    organization_description: "This is an organization.",
-                    organization_git_url: "https://github.com/creeware/frontend"
-                } */
             }
         },
         beforeRouteEnter(to, from, next){
