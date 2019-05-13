@@ -5,56 +5,55 @@ export const jwtDecoder = token => {
 };
 
 export function roleColorizer(role) {
-  switch(role){
+  switch (role) {
     case "teacher":
-      return "bg-primary"
+      return "bg-primary";
     case "student":
-      return "orange"
+      return "orange";
     case "admin":
       return "bg-grey";
     case "user":
       return "green";
     default:
-      return "bg-info"
+      return "bg-info";
   }
 }
 
-export function daysLeft(today, date){
-  if(today.getFullYear()==date.getFullYear()){
-    if(today.getMonth()==date.getMonth()){
-      return date.getDate()-today.getDate()
-    } else if(today.getMonth()==date.getMonth()-1){
-      var day1 = today.getDate()
-      var day2 = date.getDate()
-      switch(today.getMonth()){
+export function daysLeft(today, date) {
+  if (today.getFullYear() == date.getFullYear()) {
+    if (today.getMonth() == date.getMonth()) {
+      return date.getDate() - today.getDate();
+    } else if (today.getMonth() == date.getMonth() - 1) {
+      var day1 = today.getDate();
+      var day2 = date.getDate();
+      switch (today.getMonth()) {
         case 0:
-          return 31-day1+day2;
-        case 1: 
-          return 28-day1+day2;
+          return 31 - day1 + day2;
+        case 1:
+          return 28 - day1 + day2;
         case 2:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
         case 3:
-          return 30-day1+day2;
+          return 30 - day1 + day2;
         case 4:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
         case 5:
-          return 30-day1+day2;
+          return 30 - day1 + day2;
         case 6:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
         case 7:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
         case 8:
-          return 30-day1+day2;
+          return 30 - day1 + day2;
         case 9:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
         case 10:
-          return 30-day1+day2;
+          return 30 - day1 + day2;
         case 11:
-          return 31-day1+day2;
+          return 31 - day1 + day2;
       }
     }
   }
-
 }
 
 export function statusColorizer(status) {
@@ -75,18 +74,21 @@ export function statusColorizer(status) {
 }
 
 export function getDate(dateString) {
-  var date = new Date(dateString);
-  var day = date.getDate();
-  var month = date.getMonth()+1;
-  var year = date.getFullYear();
+  if (dateString) {
+    var date = new Date(dateString);
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
 
-  if(day<10){
-    day = "0"+day
+    if (day < 10) {
+      day = "0" + day;
+    }
+
+    if (month < 10) {
+      month = "0" + month;
+    }
+
+    return year + "-" + month + "-" + day;
   }
-
-  if(month<10){
-    month = "0"+month
-  }
-
-  return year + "-" + month + "-" + day;
+  return "No Date Available";
 }

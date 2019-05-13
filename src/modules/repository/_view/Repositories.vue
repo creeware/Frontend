@@ -1,9 +1,9 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs4>olalal</v-flex>
       <v-flex xs8>
         <repository-control-box
+          :profile="profile"
           @handle-create-repository="handleCreateRepository"
           @handle-create-canvas-assignment="handleCreateCanvasAssignment"
         />
@@ -66,7 +66,7 @@ export default {
       store.dispatch("getMinimalRepositories").then(() => {
         store.dispatch("getMinimalOrganizations").then(() => {
           store.dispatch("getMinimalUsers").then(() => {
-            if (this.profile.canvas_access_token) {
+            if (this.profile.user_role === 'teacher') {
               store.dispatch("getCanvasCourses", this.profile.user_uuid);
             }
             this.isListLoading = false;
