@@ -10,6 +10,7 @@ import {
   apiGetCanvasCourses,
   apiGetCanvasStudents,
   apiCreateCanvasAssignment,
+  apiResetRepository,
 } from "../_util/api";
 import * as TYPES from "@/store/types.js";
 
@@ -147,6 +148,16 @@ const actions = {
         .catch(error => reject(error));
     });
   },
+
+  resetRepository({ }, payload) {
+    return new Promise((resolve, reject) => {
+      apiResetRepository(payload)
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => reject(error))
+    })
+  }
 };
 
 export default actions;
