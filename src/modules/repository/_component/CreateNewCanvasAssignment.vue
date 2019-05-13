@@ -9,7 +9,7 @@
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-container fluid grid-list-lg>
                   <v-layout row justify-center wrap>
-                    <v-flex xs12>
+                    <v-flex xs6>
                       <v-autocomplete
                         v-model="organization_uuid"
                         :disabled="repositoriesLoading"
@@ -21,6 +21,15 @@
                         item-text="organization_name"
                         item-value="organization_uuid"
                       ></v-autocomplete>
+                    </v-flex>
+
+                    <v-flex xs6>
+                      <v-select
+                        v-model="payload.challenge_type"
+                        :items="challenge_types"
+                        label="Challenge Type"
+                        outline
+                      ></v-select>
                     </v-flex>
 
                     <v-flex xs6>
@@ -205,6 +214,7 @@ export default {
     return {
       importedRepositories: Array,
       types: ["solution", "template"],
+      challenge_types: ["structure-diff"],
       indexStep: 1,
       dialogOpen: false,
       organization_name: "",
@@ -236,7 +246,8 @@ export default {
         repository_name: "",
         organization_name: "",
         solution_repo_url: "",
-        user_canvas_ids: this.canvas_students
+        user_canvas_ids: this.canvas_students,
+        challenge_type: ""
       }
     };
   },
