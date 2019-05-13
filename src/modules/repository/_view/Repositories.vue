@@ -1,5 +1,9 @@
 <template>
   <v-container grid-list-md>
+    <v-snackbar color="bg-primary" v-model="snackbar" :top="true" :timeout="2000">
+      Action Successful!
+      <v-btn color="bg-success" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-layout row wrap>
       <v-flex xs8>
         <repository-control-box
@@ -66,7 +70,7 @@ export default {
       store.dispatch("getMinimalRepositories").then(() => {
         store.dispatch("getMinimalOrganizations").then(() => {
           store.dispatch("getMinimalUsers").then(() => {
-            if (this.profile.user_role === 'teacher') {
+            if (this.profile.user_role === "teacher") {
               store.dispatch("getCanvasCourses", this.profile.user_uuid);
             }
             this.isListLoading = false;
@@ -94,7 +98,8 @@ export default {
       isCreateCanvasAssignmentOpen: false,
       params: {
         filter: undefined
-      }
+      },
+      snackbar: false
     };
   },
   components: {
@@ -137,13 +142,17 @@ export default {
       this.isCreateRepositoryOpen = !this.isCreateRepositoryOpen;
     },
     createNewRepository(repository) {
-      this.createRepository(repository);
+      this.createRepository(repository).then(() => {
+        this.snackbar = true;
+      });
     },
     handleCreateCanvasAssignment() {
       this.isCreateCanvasAssignmentOpen = !this.isCreateCanvasAssignmentOpen;
     },
     handleCreateNewAssignment(repository) {
-      this.createCanvasRepository(repository);
+      this.createCanvasRepository(repository).then(() => {
+        this.snackbar = true;
+      });
     }
   }
 };

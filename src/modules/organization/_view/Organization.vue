@@ -78,7 +78,6 @@ export default {
     minimal_users: state => state.user.minimal_users
   }),
   components: {
-    //UserProfile,
     OrganizationCard,
     RepositoryList,
     Profile
