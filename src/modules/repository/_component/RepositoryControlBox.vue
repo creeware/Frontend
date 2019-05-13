@@ -2,7 +2,7 @@
   <v-card>
     <v-container fluid grid-list-lg>
       <v-layout row wrap>
-        <v-flex xm4>
+        <v-flex v-if="this.profile.user_role === 'teacher'" xm4>
           <v-btn
             class="bg-danger white--text"
             @click="handleCreateCanvasAssignment"
@@ -29,7 +29,8 @@
 export default {
   name: "RepositoryControlBox",
   props: {
-    organizations: Array
+    organizations: Array,
+    profile: Object
   },
   data() {
     return {};

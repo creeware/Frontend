@@ -205,7 +205,7 @@ export default {
       isSubmissionDateModalOpen: false,
       isDueDateModalOpen: false,
       isReleaseDateModalOpen: false,
-      statuses: ["unreleased", "released", "solved", "failed", "reset"],
+      statuses: ["unreleased", "released", "solved", "unsolved" , "failed", "reset"],
       types: ["challenge", "solution", "template"],
       filter: {
         organization_uuid: [],
