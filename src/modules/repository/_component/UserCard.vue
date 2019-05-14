@@ -27,20 +27,13 @@
                     </v-card>
                 </v-expansion-panel-content>
             </v-expansion-panel>
-            <v-layout row justify-center>
-                <v-btn 
-                flat 
-                class="purple white--text" 
-                :href="user.profile_url"
-                target="_blank">
-                GitHub
-                </v-btn>
-            </v-layout>
+            <git-hub-button :url="user.profile_url" />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
+import GitHubButton from "@/modules/repository/_component/GitHubButton.vue"
 import { roleColorizer } from "@/utils.js";
 export default {
   name: "UserCard",
@@ -50,6 +43,9 @@ export default {
   },
   methods: {
     roleColorizer
+  },
+  components: {
+      GitHubButton
   }
 };
 </script>

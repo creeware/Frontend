@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout>
-      <v-flex xs7 class="ma-1">
+    <v-layout row wrap>
+      <v-flex xs12 sm12 md7 lg7 xl7 class="pa-1">
         <repository-card
           v-if="orgLoaded&&userLoaded"
           :repository="repository"
@@ -9,6 +9,7 @@
           @handle-delete="handleDelete"
           @handle-reset="handleReset"
           title="Repository"
+          showButtons
         />
         <user-card v-if="userLoaded&&orgLoaded" :user="user" :color="userColor"/>
         <span v-if="isChallenge">
@@ -19,7 +20,7 @@
           />
         </span>
       </v-flex>
-      <v-flex xs5 class="ma-1">
+      <v-flex xs12 sm12 md5 lg5 xl5 class="pa-1">
         <span v-if="isChallenge">
           <repository-card
             v-if="orgLoaded&&userLoaded"
