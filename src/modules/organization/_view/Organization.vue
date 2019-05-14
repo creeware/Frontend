@@ -2,22 +2,6 @@
   <v-container>
     <v-layout>
       <v-flex>
-          <v-card v-if="hasLoaded" color="red" class="mx-1">
-            <v-card-title class="title">
-              <span class="white--text">
-                <v-icon class="white--text">folder</v-icon>Repositories
-              </span>
-            </v-card-title>
-          </v-card>
-          <repository-list class="pb-1 px-1"
-            v-if="hasLoaded"
-            :repositories="repositories"
-            :minimal_users="minimal_users"
-            :minimal_organizations="[organization]"
-            :minimal_repositories="[repositories]"
-            @handle-filter-change="applyFilterChange"
-            :filterable="false"
-          />
         <v-layout row wrap>
           <v-flex xs12 sm4 md4 lg4 xl4 class="pa-1">
               <organization-card v-if="hasLoaded" :organization="organization"/>
@@ -26,13 +10,31 @@
               <v-card v-if="hasLoaded" color="cyan darken-1">
                 <v-card-title class="title">
                   <span class="white--text">
-                    <v-icon class="white--text">person</v-icon>Owner
+                    <v-icon class="white--text">person</v-icon>
+                    Owner
                   </span>
                 </v-card-title>
+                <profile :profile="user" v-if="hasLoaded"/>
               </v-card>
-              <profile :profile="user" v-if="hasLoaded"/>
           </v-flex>
         </v-layout>
+          <v-card v-if="hasLoaded" color="red darken-1" class="mt-1 mx-1">
+            <v-card-title class="title">
+              <span class="white--text">
+                <v-icon class="white--text">folder</v-icon>
+                Repositories
+              </span>
+            </v-card-title>
+            <repository-list
+              v-if="hasLoaded"
+              :repositories="repositories"
+              :minimal_users="minimal_users"
+              :minimal_organizations="[organization]"
+              :minimal_repositories="[repositories]"
+              @handle-filter-change="applyFilterChange"
+              :filterable="false"
+            />
+          </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -47,8 +49,6 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "Organization",
   beforeMount() {
-    //this.params.filter.organization_uuid = this.organization.organization_uuid
-    //this.applyFilterChange(this.params.filter)
     store.dispatch("getUser", this.organization.user_uuid).then(() => {
       store.dispatch("getRepositories", this.params.filter).then(() => {
         store
@@ -61,7 +61,6 @@ export default {
                   this.isListLoading = false;
                   this.params.filter.organization_uuid = this.organization.organization_uuid;
                   this.applyFilterChange(this.params.filter);
-                  //this.userFilter()
                   this.hasLoaded = true;
                 });
               });
