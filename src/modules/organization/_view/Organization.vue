@@ -19,10 +19,10 @@
             :filterable="false"
           />
         <v-layout row wrap>
-          <v-flex xs12 sm12 md4 lg4 xl4 class="pa-1">
+          <v-flex xs12 sm4 md4 lg4 xl4 class="pa-1">
               <organization-card v-if="hasLoaded" :organization="organization"/>
           </v-flex>
-          <v-flex xs12 sm12 md8 lg8 xl8 class="pa-1">
+          <v-flex xs12 sm8 md8 lg8 xl8 class="pa-1">
               <v-card v-if="hasLoaded" color="cyan darken-1">
                 <v-card-title class="title">
                   <span class="white--text">
