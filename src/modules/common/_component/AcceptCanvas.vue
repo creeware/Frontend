@@ -2,7 +2,7 @@
   <v-layout row justify-center>
     <v-dialog v-model="modalOpen" persistent max-width="50vw">
       <v-card>
-        <v-card-title class="headline">Accept Canvas integraton</v-card-title>
+        <v-card-title class="headline">Accept Canvas Integration</v-card-title>
 
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-container fluid grid-list-lg>
