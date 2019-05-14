@@ -10,7 +10,7 @@ export function apiGetProfileStatistics(uuid) {
 }
 
 export function apiUpdateProfile(updatedProfile) {
-    const url = `/api/users/patch`;
+    const url = `/api/users/patch/`;
     return axios.patch(url, updatedProfile);
 }
 
