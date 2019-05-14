@@ -19,6 +19,7 @@
           :minimal_users="minimal_users"
           :minimal_organizations="minimal_organizations"
           @handle-filter-change="applyFilterChange"
+          :filterable="true"
         />
       </v-flex>
       <import-organization
@@ -76,7 +77,7 @@ export default {
     ImportOrganization
   },
   methods: {
-    ...mapActions(["importOrganization", "updateImportedRepository"]),
+    ...mapActions(["importOrganization", "updateImportedRepository", "getOrganizations"]),
     handleImportOrganization() {
       this.isImportOrganizationOpen = !this.isImportOrganizationOpen;
     },

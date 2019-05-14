@@ -31,7 +31,7 @@
         <v-card-text>{{ props.item.repository_description }}</v-card-text>
       </v-card>
     </template>
-    <template v-slot:footer>
+    <template v-slot:footer v-if="filterable">
       <td :colspan="headers.length">
         <repositories-filter
           :repositories="repositories"
@@ -86,7 +86,8 @@ export default {
     repositories: Array,
     minimal_users: Array,
     minimal_repositories: Array,
-    minimal_organizations: Array
+    minimal_organizations: Array,
+    filterable: Boolean
   },
   data() {
     return {

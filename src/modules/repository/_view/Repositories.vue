@@ -19,6 +19,7 @@
           :minimal_organizations="minimal_organizations"
           :minimal_repositories="minimal_repositories"
           @handle-filter-change="applyFilterChange"
+          :filterable="true"
         />
       </v-flex>
       <create-new-repository
