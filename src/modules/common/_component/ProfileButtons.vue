@@ -1,29 +1,6 @@
 <template>
   <v-card color="white" class="black--text gugi-text">
     <v-container grid-list-md>
-      <v-layout align-center justify-center row fill-height>
-        <v-flex xs7>
-          <v-card-title primary-title>
-            <div>
-              <div class="headline">{{ profile.user_display_name }}</div>
-              <div>{{ profile.username }}</div>
-              <div>{{ profile.user_email }}</div>
-            </div>
-          </v-card-title>
-        </v-flex>
-        <v-flex xs5>
-          <v-img :src="profile.avatar_url" :lazy-src="profile.avatar_url" height="125px" contain>
-            <template v-slot:placeholder>
-              <v-layout fill-height align-center justify-center ma-0>
-                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-              </v-layout>
-            </template>
-          </v-img>
-        </v-flex>
-      </v-layout>
-      <div v-if="showButtons">
-      <v-divider light></v-divider>
-      <v-card-actions class="pa-3" v>
         <v-layout row wrap>
           <v-flex v-if="this.profile.user_role != 'student'" xs8>
             <v-btn
@@ -50,8 +27,6 @@
             <v-btn @click="handleLogout" class="bg-primary white--text roboto-text" small>Logout</v-btn>
           </v-flex>
         </v-layout>
-      </v-card-actions>
-      </div>
     </v-container>
   </v-card>
 </template>
@@ -65,8 +40,7 @@ export default {
     profile: {
       user_display_name: undefined,
       user_email: undefined
-    },
-    showButtons: false
+    }
   },
   methods: {
     handleEditProfile() {
