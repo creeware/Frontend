@@ -145,6 +145,7 @@ export default {
     createNewRepository(repository) {
       this.createRepository(repository).then(() => {
         this.snackbar = true;
+
       });
     },
     handleCreateCanvasAssignment() {

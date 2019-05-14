@@ -46,7 +46,7 @@
               small
             >Canvas Invitation</v-btn>
           </v-flex>
-          <v-flex v-if="this.profile.user_role === 'user'" xm4>
+          <v-flex xm4>
             <v-btn @click="handleLogout" class="bg-primary white--text roboto-text" small>Logout</v-btn>
           </v-flex>
         </v-layout>

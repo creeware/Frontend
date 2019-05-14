@@ -94,13 +94,17 @@ export default {
       this.isIntegrateCanvasOpen = !this.isIntegrateCanvasOpen;
     },
     handleCanvasIntegration(payload) {
-      this.canvasIntegration(payload);
+      this.canvasIntegration(payload).then(() => {
+        this.$router.go()
+      });
     },
     handleAcceptCanvasInvitation() {
       this.isAcceptCanvasOpen = !this.isAcceptCanvasOpen;
     },
     handleCanvasMigration(payload) {
-      this.canvasMigration(payload);
+      this.canvasMigration(payload).then(() => {
+        this.$router.go()
+      });
     }
   }
 };

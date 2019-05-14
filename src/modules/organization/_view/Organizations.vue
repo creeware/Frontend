@@ -85,6 +85,7 @@ export default {
       this.importLoading = true;
       this.importOrganization(organization_name).then(() => {
         this.importLoading = false;
+        this.getOrganizations();
       });
     },
     applyFilterChange(filter) {

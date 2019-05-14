@@ -3,7 +3,7 @@
     <v-container>
       <UserProfile :profile="user"/>
     </v-container>
-    <v-container>
+    <v-container v-if="profile.user_uuid === user.user_uuid">
       <repository-list
         :repositories="repositories"
         :minimal_users="minimal_users"
@@ -13,7 +13,7 @@
         @handle-filter-change="applyFilterChange"
       />
     </v-container>
-    <v-container>
+    <v-container v-if="profile.user_uuid === user.user_uuid">
       <organization-list
         :organizations="organizations"
         :minimal_users="minimal_users"
@@ -51,6 +51,7 @@ export default {
       });
   },
   computed: mapState({
+    profile: state => state.authentication.profile,
     user: state => state.user.user,
     organizations: state => state.organization.organizations,
     repository: state => state.repository.repository,
