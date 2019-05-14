@@ -130,11 +130,45 @@
                         v-model="payload.release_date"
                         scrollable
                       >
+                      
                         <v-spacer></v-spacer>
                         <v-btn
                           flat
                           class="bg-primary white--text"
                           @click="isSubmissionDateModalOpen = false"
+                        >Close</v-btn>
+                      </v-date-picker>
+                    </v-dialog>
+
+                    <v-dialog
+                      ref="dialog"
+                      v-model="isDueDateModalOpen"
+                      persistent
+                      lazy
+                      full-width
+                      width="290px"
+                    >
+                      <template v-slot:activator="{ on }">
+                        <v-text-field
+                          v-model="payload.due_date"
+                          label="Due Date"
+                          prepend-icon="event"
+                          readonly
+                          v-on="on"
+                          clearable
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        color="cyan darken-1"
+                        v-model="payload.due_date"
+                        scrollable
+                      >
+                      
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          flat
+                          class="bg-primary white--text"
+                          @click="isDueDateModalOpen = false"
                         >Close</v-btn>
                       </v-date-picker>
                     </v-dialog>
@@ -182,6 +216,7 @@ export default {
       organization_name: "",
       valid: true,
       isSubmissionDateModalOpen: false,
+      isDueDateModalOpen: false,
       name: "",
       nameRules: [v => !!v || "Name is required"],
       organization_uuid: undefined,
@@ -199,6 +234,7 @@ export default {
         user_names: [],
         solution_repo_url: "",
         release_date: "",
+        due_date: "",
         admin_user_name: this.profile.username,
         client_name: "GitHubClient",
         challenge_type: ""
