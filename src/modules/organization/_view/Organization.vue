@@ -1,38 +1,40 @@
 <template>
-  <div>
-    <v-layout class="">
-      <v-flex xs4>
-        <organization-card class="mb-2" v-if="hasLoaded" :organization="organization"/>
-        <v-card v-if="hasLoaded" color="cyan darken-1">
-          <v-card-title class="title">
-            <span class="white--text">
-                <v-icon class="white--text">person</v-icon>
-                Owner
-            </span>
-          </v-card-title>
-        </v-card>
-        <profile :profile="user" v-if="hasLoaded" />
-      </v-flex>
-      <v-flex xs8 class="ml-2">
+  <v-container>
+    <v-layout>
+      <v-flex>
         <v-card v-if="hasLoaded" color="red">
           <v-card-title class="title">
             <span class="white--text">
-                <v-icon class="white--text">folder</v-icon>
-                Repositories
+              <v-icon class="white--text">folder</v-icon>Repositories
             </span>
           </v-card-title>
         </v-card>
-        <repository-list
+        <repository-list class="mb-2"
           v-if="hasLoaded"
           :repositories="repositories"
           :minimal_users="minimal_users"
           :minimal_organizations="[organization]"
           :minimal_repositories="[repositories]"
           @handle-filter-change="applyFilterChange"
-          />
+        />
+        <v-layout>
+          <v-flex xs4>
+            <organization-card v-if="hasLoaded" :organization="organization"/>
+          </v-flex>
+          <v-flex xs8 class="ml-2">
+            <v-card v-if="hasLoaded" color="cyan darken-1">
+              <v-card-title class="title">
+                <span class="white--text">
+                  <v-icon class="white--text">person</v-icon>Owner
+                </span>
+              </v-card-title>
+            </v-card>
+            <profile :profile="user" v-if="hasLoaded"/>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -44,28 +46,32 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "Organization",
   beforeMount() {
-
     //this.params.filter.organization_uuid = this.organization.organization_uuid
     //this.applyFilterChange(this.params.filter)
     store.dispatch("getUser", this.organization.user_uuid).then(() => {
       store.dispatch("getRepositories", this.params.filter).then(() => {
-        store.dispatch("getMinimalRepositories", this.params.filter).then(() => {
-          store.dispatch("getMinimalOrganizations", this.params.filter).then(() => {
-            store.dispatch("getMinimalUsers").then(() => {
-              this.isListLoading = false;
-              this.params.filter.organization_uuid = this.organization.organization_uuid 
-              this.applyFilterChange(this.params.filter)
-              //this.userFilter()
-              this.hasLoaded = true;
-            });
+        store
+          .dispatch("getMinimalRepositories", this.params.filter)
+          .then(() => {
+            store
+              .dispatch("getMinimalOrganizations", this.params.filter)
+              .then(() => {
+                store.dispatch("getMinimalUsers").then(() => {
+                  this.isListLoading = false;
+                  this.params.filter.organization_uuid = this.organization.organization_uuid;
+                  this.applyFilterChange(this.params.filter);
+                  //this.userFilter()
+                  this.hasLoaded = true;
+                });
+              });
           });
-        });
       });
     });
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("getOrganization", to.params.uuid).then(() => {
-      next()});
+      next();
+    });
   },
   computed: mapState({
     organization: state => state.organization.organization,
@@ -83,7 +89,7 @@ export default {
     Profile
   },
   data() {
-    return ({
+    return {
       isListLoading: false,
       repositoriesLoading: false,
       params: {
@@ -99,7 +105,7 @@ export default {
       },
       hasLoaded: false,
       users: []
-    });
+    };
   },
   methods: {
     ...mapActions([
@@ -123,9 +129,12 @@ export default {
     },
     userFilter() {
       var i;
-      for(i = 0; i < this.repositories.length; i++) {
-        if(this.repositories[i].organization_uuid === this.organization.organization_uuid)
-          this.users.push(this.getUser(this.repositories[i].user_uuid))
+      for (i = 0; i < this.repositories.length; i++) {
+        if (
+          this.repositories[i].organization_uuid ===
+          this.organization.organization_uuid
+        )
+          this.users.push(this.getUser(this.repositories[i].user_uuid));
       }
     }
   }
