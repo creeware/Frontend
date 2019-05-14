@@ -98,6 +98,15 @@
                   </v-flex>
 
                   <v-flex xs6>
+                      <v-select
+                        v-model="payload.challenge_type"
+                        :items="challenge_types"
+                        label="Challenge Type"
+                        outline
+                      ></v-select>
+                    </v-flex>
+
+                  <v-flex xs6>
                     <v-dialog
                       ref="dialog"
                       v-model="isSubmissionDateModalOpen"
@@ -167,6 +176,7 @@ export default {
     return {
       importedRepositories: Array,
       types: ["solution", "template"],
+      challenge_types: ["structure-diff"],
       indexStep: 1,
       modalOpen: false,
       organization_name: "",
@@ -190,7 +200,8 @@ export default {
         solution_repo_url: "",
         release_date: "",
         admin_user_name: this.profile.username,
-        client_name: "GitHubClient"
+        client_name: "GitHubClient",
+        challenge_type: ""
       }
     };
   },
@@ -219,9 +230,9 @@ export default {
       const index = this.payload.user_names.indexOf(item.username);
       if (index >= 0) this.payload.user_names.splice(index, 1);
     },
-    handleCreateNewRepository(){
-        this.modalOpen = false;
-        this.$emit("handle-create-new-repository", this.payload);
+    handleCreateNewRepository() {
+      this.modalOpen = false;
+      this.$emit("handle-create-new-repository", this.payload);
     }
   }
 };
