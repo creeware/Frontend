@@ -1,8 +1,8 @@
 <template>
-  <v-card class="white--text gugi-text">
+  <v-card class="gugi-text">
     <v-container fluid grid-list-lg>
       <v-layout align-center justify-center row fill-height>
-        <v-flex xs4>
+        <v-flex xs6>
           <v-progress-circular
             style="margin auto;"
             rotate="180"
@@ -12,29 +12,28 @@
           ></v-progress-circular>
         </v-flex>
 
-        <v-flex xs8>
+        <v-flex xs6>
           <v-layout column>
-            <v-flex xs6>
-              <v-list two-line subheader>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ "Solved Repositories" }}</v-list-tile-title>
-                    <v-list-tile-sub-title>{{ profile_statistics.solvedRepositories }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ "Unsolved Repositories" }}</v-list-tile-title>
-                    <v-list-tile-sub-title>{{ profile_statistics.unsolvedRepositories }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-content>
-                    <v-list-tile-title>{{ "Total" }}</v-list-tile-title>
-                    <v-list-tile-sub-title>{{ profile_statistics.totalRepositories }}</v-list-tile-sub-title>
-                  </v-list-tile-content>
-                </v-list-tile>
-              </v-list>
+            <v-flex xs12>
+              <v-card-text>
+              Solved Repositories
+              <br>
+              {{ profile_statistics.solvedRepositories }}
+              </v-card-text>
+            </v-flex>
+            <v-flex xs12>
+              <v-card-text>
+                Unsolved Repositories
+                <br>
+                {{ profile_statistics.unsolvedRepositories }}
+              </v-card-text>
+            </v-flex>
+            <v-flex xs12>
+              <v-card-text>
+                Total
+                <br>
+                {{ profile_statistics.totalRepositories }}
+              </v-card-text>
             </v-flex>
           </v-layout>
         </v-flex>
