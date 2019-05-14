@@ -1,5 +1,5 @@
 <template>
-    <v-layout row justify-center>
+  <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="290">
       <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Delete Repository</v-btn>
@@ -18,19 +18,16 @@
 
 <script>
 export default {
-    
-
-    name: "DeleteRepository",
-    data(){
-        return{
-            dialog: false
-        }
-    },
-    props: {
-        repository: Object,
-        handleDelete: Function
-    },
-    methods: {
-    }
-}
+  name: "DeleteRepository",
+  data() {
+    return {
+      dialog: false
+    };
+  },
+  props: {
+    repository: Object,
+    handleDelete: Function
+  },
+  methods: {}
+};
 </script>
