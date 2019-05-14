@@ -5,7 +5,7 @@
       <v-btn color="bg-success" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
     <v-layout row wrap>
-      <v-flex xs4>
+      <v-flex xs12>
         <user-control-box @handle-invite-user="handleInviteUser"/>
       </v-flex>
       <v-flex xs12>
