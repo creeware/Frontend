@@ -1,13 +1,8 @@
 <template>
   <v-container grid-list-md>
-    <v-snackbar
-      color="bg-primary"
-      v-model="snackbar"
-      :top="true"
-      :timeout="2000"
-    >
+    <v-snackbar color="bg-primary" v-model="snackbar" :top="true" :timeout="2000">
       "Repository status updated!"
-      <v-btn color=bg-success flat @click="snackbar = false">Close</v-btn>
+      <v-btn color="bg-success" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
     <v-layout row wrap>
       <v-flex xs6>

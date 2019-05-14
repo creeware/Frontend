@@ -7,17 +7,15 @@
       </span>
     </v-card-title>
     <v-card-text class="white text--primary">
-        <span v-if="!showButtons">
-            <b>{{"Name: "}}</b>
-            <a
-            class="link-item"
-            :href="repository.repository_uuid"
-            target="_blank"
-            >
-            {{ repository.repository_name }}
-            </a>
-            <br>
-        </span>
+      <span v-if="!showButtons">
+        <b>{{"Name: "}}</b>
+        <a
+          class="link-item"
+          :href="repository.repository_uuid"
+          target="_blank"
+        >{{ repository.repository_name }}</a>
+        <br>
+      </span>
       <span v-if="showButtons">
         <b>{{ "GitHub: "}}</b>
         <a
@@ -26,6 +24,22 @@
           target="_blank"
         >{{repository.repository_name}}</a>
         <br>
+        <v-container fluid>
+          <v-layout row wrap align-center>
+            <v-flex xs6>
+              <v-select
+                v-model="repository.repository_type"
+                :items="repository_types"
+                :label="repository.repository_type"
+                persistent-hint
+                single-line
+              ></v-select>
+            </v-flex>
+            <v-flex xs6>
+              <v-btn @click="handleChangeType" class="primary">APPLY</v-btn>
+            </v-flex>
+          </v-layout>
+        </v-container>
         <b>{{ "Remaining attempts: "}}</b>
         {{ this.attempts(repository) }}
         <br>
@@ -37,7 +51,21 @@
       >{{ repository.repository_status.toUpperCase() }}</v-chip>
       <br>
 
-      <v-expansion-panel popout>
+      <v-layout row wrap>
+        <v-flex xs8>
+          <v-textarea
+            outline
+            v-model="repository.repository_description"
+            :readonly="!isEditable"
+            label="Description"
+          ></v-textarea>
+        </v-flex>
+        <v-flex xs4 v-if="isAdmin">
+          <v-btn class="primary" @click="toggleEdit">{{ editButtonText }}</v-btn>
+          <v-btn class="primary" @click="handleChangeDescription" v-if="isEditable">Apply</v-btn>
+        </v-flex>
+      </v-layout>
+      <!--       <v-expansion-panel popout>
         <v-expansion-panel-content>
           <template v-slot:header>
             <div>
@@ -48,7 +76,7 @@
             <v-card-text class="grey lighten-3">{{ repository.repository_description }}</v-card-text>
           </v-card>
         </v-expansion-panel-content>
-      </v-expansion-panel>
+      </v-expansion-panel>-->
       <v-container>
         <v-layout row wrap>
           <v-flex xs12 sm12 md6 lg6 xl6>
@@ -64,24 +92,28 @@
               :repository="repository"
               :handleReset="handleReset"
             />
-            <git-hub-button v-if="!showButtons" :url="repository.repository_git_url" />
- <!--            <v-btn
+            <!--            <v-btn
                 
                 flat 
                 class="purple white--text" 
                 :href="repository.repository_git_url"
                 target="_blank">
                 GitHub
-            </v-btn> -->
+            </v-btn>-->
           </v-flex>
         </v-layout>
+        <git-hub-button v-if="!showButtons" :url="repository.repository_git_url"/>
       </v-container>
     </v-card-text>
+    <v-snackbar v-model="snackbar" top :timeout="3000" color="info">
+      Repository type has been changed!
+      <v-btn flat @click="snackbar=false">Close</v-btn>
+    </v-snackbar>
   </v-card>
 </template>
 
 <script>
-import GitHubButton from "@/modules/repository/_component/GitHubButton.vue"
+import GitHubButton from "@/modules/repository/_component/GitHubButton.vue";
 import DeleteRepository from "@/modules/repository/_component/DeleteRepository.vue";
 import ResetRepository from "@/modules/repository/_component/ResetRepository";
 import { statusColorizer } from "@/utils";
@@ -89,7 +121,12 @@ import { statusColorizer } from "@/utils";
 export default {
   name: "RepositoryCard",
   data() {
-    return {};
+    return {
+      repository_types: ["template", "solution", "challenge", "unspecified"],
+      snackbar: false,
+      isEditable: false,
+      editButtonText: "Edit"
+    };
   },
   props: {
     repository: Object,
@@ -118,6 +155,24 @@ export default {
       } else {
         return repository.try_count;
       }
+    },
+    handleChangeType() {
+      this.snackbar = true;
+      this.$emit("handle-change", this.repository);
+    },
+
+    toggleEdit(){
+      this.isEditable = !this.isEditable;
+      if(this.isEditable){
+        this.editButtonText = "Cancel"
+      } else{
+        this.editButtonText = "Edit"
+      }
+    },
+
+    handleChangeDescription(){
+      this.$emit("handle-change", this.repository)
+      this.isEditable = false
     }
   }
 };

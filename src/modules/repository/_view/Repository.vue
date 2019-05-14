@@ -8,42 +8,18 @@
           :color="repositoryColor"
           @handle-delete="handleDelete"
           @handle-reset="handleReset"
+          @handle-change="handleUpdate"
           title="Repository"
           showButtons
         />
         <user-card v-if="userLoaded&&orgLoaded" :user="user" :color="userColor"/>
-        <span v-if="isChallenge">
-          <organization-card
-            v-if="orgLoaded&&userLoaded"
-            :organization="organization"
-            :color="organizationColor"
-          />
-        </span>
       </v-flex>
       <v-flex xs12 sm12 md5 lg5 xl5 class="pa-1">
-        <span v-if="isChallenge">
-          <repository-card
-            v-if="orgLoaded&&userLoaded"
-            :repository="repository"
-            :color="repositoryColor"
-            @handle-delete="handleDelete"
-            title="Solution"
-          />
-          <repository-card
-            v-if="orgLoaded&&userLoaded"
-            :repository="repository"
-            :color="repositoryColor"
-            @handle-delete="handleDelete"
-            title="Template"
-          />
-        </span>
-        <span v-if="!isChallenge">
-          <organization-card
-            v-if="orgLoaded&&userLoaded"
-            :organization="organization"
-            :color="organizationColor"
-          />
-        </span>
+        <organization-card
+          v-if="orgLoaded&&userLoaded"
+          :organization="organization"
+          :color="organizationColor"
+        />
         <repository-timeline v-if="orgLoaded&&userLoaded" :repository="repository"/>
       </v-flex>
       <v-snackbar v-model="snackbar" top :timeout="10000" :color="snackbarColor">
@@ -104,7 +80,7 @@ export default {
     organization: state => state.organization.organization
   }),
   methods: {
-    ...mapActions(["deleteRepository", "resetRepository"]),
+    ...mapActions(["deleteRepository", "resetRepository", "updateRepository"]),
     handleDelete(uuid) {
       this.deleteRepository(uuid);
       this.$router.replace("/repositories");
@@ -146,6 +122,9 @@ export default {
     handleReset() {
       this.repositoryName.repository_name = this.repository.repository_name;
       this.resetRepository(this.repositoryName);
+    },
+    handleUpdate(repository) {
+      this.updateRepository(repository);
     }
   },
   components: {

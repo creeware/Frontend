@@ -4,31 +4,29 @@
       <v-card>
         <v-card-title class="headline">
           <v-container fluid grid-list-lg>
-          <v-stepper v-model="indexStep">
-          <v-stepper-header>
-                  <v-stepper-step
-                    color="cyan darken-1"
-                    :complete="indexStep > 1"
-                    step="1"
-                  >Import Organization</v-stepper-step>
+            <v-stepper v-model="indexStep">
+              <v-stepper-header>
+                <v-stepper-step
+                  color="cyan darken-1"
+                  :complete="indexStep > 1"
+                  step="1"
+                >Import Organization</v-stepper-step>
 
-                  <v-divider></v-divider>
+                <v-divider></v-divider>
 
-                  <v-stepper-step
-                    color="cyan darken-1"
-                    :complete="indexStep > 2"
-                    step="2"
-                  >Integrate Repositories</v-stepper-step>
-                </v-stepper-header>
-          </v-stepper>
+                <v-stepper-step
+                  color="cyan darken-1"
+                  :complete="indexStep > 2"
+                  step="2"
+                >Integrate Repositories</v-stepper-step>
+              </v-stepper-header>
+            </v-stepper>
           </v-container>
-          </v-card-title>
+        </v-card-title>
         <v-card-text style="height: 50vh;">
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-container fluid grid-list-lg>
               <v-stepper v-model="indexStep">
-                
-
                 <v-stepper-items flat>
                   <v-stepper-content step="1" flat>
                     <v-text-field
