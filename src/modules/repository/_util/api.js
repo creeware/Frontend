@@ -42,3 +42,8 @@ export function apiCreateCanvasAssignment(payload){
     const url = `/api/canvas/repository/`
     return axios.post(url, payload);
 }
+
+export function apiResetRepository(payload) {
+    const url = `/api/repositories/reset/`
+    return axios.post(url, payload)
+}
