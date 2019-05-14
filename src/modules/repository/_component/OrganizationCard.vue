@@ -19,26 +19,20 @@
                     </v-card>
                 </v-expansion-panel-content>
             </v-expansion-panel> 
-        <v-layout row justify-center>
-            <v-btn 
-            flat 
-            class="purple white--text" 
-            :href="organization.organization_git_url"
-            target="_blank"
-            >
-            GitHub
-            </v-btn>
-        </v-layout>
+            <git-hub-button :url="organization.organization_git_url" />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
+import GitHubButton from "@/modules/repository/_component/GitHubButton.vue"
 export default {
   name: "OrganizationCard",
   props: {
     organization: Object,
     color: String
+  }, components: {
+      GitHubButton
   }
 };
 </script>
