@@ -25,12 +25,12 @@
         >{{repository.repository_name}}</a>
         <br>
         <v-container fluid>
-          <v-layout row wrap align-center>
+          <v-layout row wrap justify-center>
             <v-flex xs6>
               <v-select
                 v-model="repository.repository_type"
                 :items="repository_types"
-                :label="repository.repository_type"
+                hint="Select type"
                 persistent-hint
                 single-line
               ></v-select>
@@ -40,9 +40,6 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <b>{{ "Remaining attempts: "}}</b>
-        {{ this.attempts(repository) }}
-        <br>
         <v-layout row wrap>
           <v-flex xs12>
             <b>{{ "Status: "}}</b>
@@ -51,7 +48,7 @@
               text-color="white"
             >{{ repository.repository_status.toUpperCase() }}</v-chip>
           </v-flex>
-          <v-flex xs12 v-if="!changeAttempts">
+          <v-flex xs12 v-if="!changeAttempts&&isChallenge">
             <b>{{ "Remaining attempts: "}}</b>
             {{ this.attempts(repository) }}
           </v-flex>
@@ -90,8 +87,8 @@
       </span>
       <br>
 
-      <v-layout row wrap>
-        <v-flex xs8>
+      <v-layout row wrap v-if="isAdmin">
+        <v-flex xs7>
           <v-textarea
             outline
             v-model="repository.repository_description"
@@ -99,7 +96,7 @@
             label="Description"
           ></v-textarea>
         </v-flex>
-        <v-flex xs4 v-if="isAdmin">
+        <v-flex xs5 v-if="isAdmin">
           <v-btn class="primary" @click="toggleEdit">{{ editButtonText }}</v-btn>
           <v-btn class="primary" @click="handleChangeDescription" v-if="isEditable">Apply</v-btn>
         </v-flex>
@@ -107,7 +104,7 @@
 
       <v-container v-if="isAdmin" >
         <v-layout row wrap align-center>
-          <v-flex xs12 sm12 md12 lg4 xl4 v-if="isAdmin">
+          <v-flex xs12 sm12 md12 lg4 xl4 v-if="isAdmin&&isChallenge">
             <v-layout row justify-center>
               <v-btn @click="openChangeAttempts" color="primary">Change Attempts</v-btn>
             </v-layout>
@@ -160,7 +157,6 @@ export default {
       isEditable: false,
       editButtonText: "Edit",
       changeAttempts: false,
-      buttonText: "Change Attempts",
       isAdmin: false
     };
   },
@@ -172,7 +168,8 @@ export default {
     color: String,
     title: String,
     showButtons: Boolean,
-    profile: Object
+    profile: Object,
+    isChallenge: Boolean
   },
   components: {
     DeleteRepository,
@@ -211,6 +208,7 @@ export default {
     },
 
     handleChangeDescription(){
+      this.editButtonText = "Edit"
       this.$emit("handle-change", this.repository)
       this.isEditable = false
     },
@@ -225,8 +223,7 @@ export default {
       }
     },
     openChangeAttempts() {
-      this.changeAttempts = true;
-      this.buttonText = "Update Attempts";
+      this.changeAttempts = !this.changeAttempts;
     },
     applyChangedAttempts() {
       this.$emit("handle-change-attempts", this.repository);
