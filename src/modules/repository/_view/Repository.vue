@@ -11,6 +11,8 @@
           @handle-change="handleUpdate"
           title="Repository"
           showButtons
+          @handle-change-attempts="handleChangeAttempts"
+          :profile="profile"
         />
         <user-card v-if="userLoaded&&orgLoaded" :user="user" :color="userColor"/>
       </v-flex>
@@ -26,6 +28,7 @@
         {{snackbarMessage}}
         <v-btn color="black" flat @click="snackbar=false">Close</v-btn>
       </v-snackbar>
+      <v-snackbar v-model="changesApplied" :timeout="5000" color="info">Attempts has been changed!<v-btn color="white" flat @click="changesApplied=false">Close</v-btn></v-snackbar>
     </v-layout>
   </v-container>
 </template>
@@ -58,7 +61,8 @@ export default {
       isChallenge: false,
       repositoryName: {
         repository_name: ""
-      }
+      },
+      changesApplied: false
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -71,13 +75,12 @@ export default {
     store
       .dispatch("getUser", this.repository.repository_admin_uuid)
       .then(() => (this.$data.userLoaded = true));
-    this.checkIfDue(new Date(this.repository.due_date));
-    this.checkIfChallenge();
   },
   computed: mapState({
     repository: state => state.repository.repository,
     user: state => state.user.user,
-    organization: state => state.organization.organization
+    organization: state => state.organization.organization,
+    profile: state => state.authentication.profile
   }),
   methods: {
     ...mapActions(["deleteRepository", "resetRepository", "updateRepository"]),
@@ -125,6 +128,9 @@ export default {
     },
     handleUpdate(repository) {
       this.updateRepository(repository);
+    },
+    handleChangeAttempts(repository){
+      this.updateRepository(repository).then(() => (this.changesApplied = true))
     }
   },
   components: {

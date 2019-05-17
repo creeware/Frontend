@@ -43,12 +43,51 @@
         <b>{{ "Remaining attempts: "}}</b>
         {{ this.attempts(repository) }}
         <br>
+        <v-layout row wrap>
+          <v-flex xs12>
+            <b>{{ "Status: "}}</b>
+            <v-chip
+              :color="statusColorizer(repository.repository_status)"
+              text-color="white"
+            >{{ repository.repository_status.toUpperCase() }}</v-chip>
+          </v-flex>
+          <v-flex xs12 v-if="!changeAttempts">
+            <b>{{ "Remaining attempts: "}}</b>
+            {{ this.attempts(repository) }}
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap align-center v-if="isAdmin">
+          <v-flex xs0 sm4 md4 lg4 xl4></v-flex>
+          <v-flex v-if="changeAttempts" xs4>
+            <v-text-field
+              v-model="repository.try_count"
+              label="Attempts"
+              :value="repository.try_count"
+              :disabled="repository.unlimited"
+            ></v-text-field>
+          </v-flex>
+          <v-flex v-if="changeAttempts" xs4>
+            <v-checkbox
+              v-model="repository.unlimited"
+              color="info"
+              label="Unlimited"
+              :value="repository.unlimited"
+            ></v-checkbox>
+          </v-flex>
+          <v-flex xs0 sm4 md4 lg4 xl4></v-flex>
+          <v-flex xs8 v-if="changeAttempts">
+            <v-btn @click="applyChangedAttempts" color="primary">Update Attempts</v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn @click="changeAttempts=false" color="error" icon v-on="on">
+                  <v-icon>close</v-icon>
+                </v-btn>
+              </template>
+              <span>Close</span>
+            </v-tooltip>
+          </v-flex>
+        </v-layout>
       </span>
-      <b>{{ "Status: "}}</b>
-      <v-chip
-        :color="statusColorizer(repository.repository_status)"
-        text-color="white"
-      >{{ repository.repository_status.toUpperCase() }}</v-chip>
       <br>
 
       <v-layout row wrap>
@@ -65,41 +104,35 @@
           <v-btn class="primary" @click="handleChangeDescription" v-if="isEditable">Apply</v-btn>
         </v-flex>
       </v-layout>
-      <!--       <v-expansion-panel popout>
-        <v-expansion-panel-content>
-          <template v-slot:header>
-            <div>
-              <b>Description</b>
-            </div>
-          </template>
-          <v-card>
-            <v-card-text class="grey lighten-3">{{ repository.repository_description }}</v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>-->
-      <v-container>
-        <v-layout row wrap>
-          <v-flex xs12 sm12 md6 lg6 xl6>
+
+      <v-container v-if="isAdmin" >
+        <v-layout row wrap align-center>
+          <v-flex xs12 sm12 md12 lg4 xl4 v-if="isAdmin">
+            <v-layout row justify-center>
+              <v-btn @click="openChangeAttempts" color="primary">Change Attempts</v-btn>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 sm6 md6 lg4 xl4 v-if="isAdmin">
             <delete-repository
               v-if="showButtons"
               :repository="repository"
               :handleDelete="handleDelete"
             />
           </v-flex>
-          <v-flex xs12 sm12 md6 lg6 xl6>
+          <v-flex xs12 sm6 md6 lg4 xl4 v-if="isAdmin">
             <reset-repository
               v-if="showButtons"
               :repository="repository"
               :handleReset="handleReset"
             />
-            <!--            <v-btn
-                
-                flat 
-                class="purple white--text" 
-                :href="repository.repository_git_url"
-                target="_blank">
-                GitHub
-            </v-btn>-->
+          </v-flex>
+          <v-flex xs12 v-if="!isAdmin">
+            <reset-repository
+              v-if="showButtons"
+              :repository="repository"
+              :handleReset="handleReset"
+            />
+            <git-hub-button v-if="!showButtons" :url="repository.repository_git_url"/>
           </v-flex>
         </v-layout>
         <git-hub-button v-if="!showButtons" :url="repository.repository_git_url"/>
@@ -125,14 +158,21 @@ export default {
       repository_types: ["template", "solution", "challenge", "unspecified"],
       snackbar: false,
       isEditable: false,
-      editButtonText: "Edit"
+      editButtonText: "Edit",
+      changeAttempts: false,
+      buttonText: "Change Attempts",
+      isAdmin: false
     };
+  },
+  beforeMount(){
+    this.checkIfAdmin();
   },
   props: {
     repository: Object,
     color: String,
     title: String,
-    showButtons: Boolean
+    showButtons: Boolean,
+    profile: Object
   },
   components: {
     DeleteRepository,
@@ -173,6 +213,29 @@ export default {
     handleChangeDescription(){
       this.$emit("handle-change", this.repository)
       this.isEditable = false
+    },
+    
+    handleChangeAttempts() {
+      if (!this.changeAttempts) {
+        this.changeAttempts = true;
+        this.buttonText = "Update Attempts";
+      } else {
+        this.$emit("handle-change-attempts", this.repository);
+        this.changeAttempts = false;
+      }
+    },
+    openChangeAttempts() {
+      this.changeAttempts = true;
+      this.buttonText = "Update Attempts";
+    },
+    applyChangedAttempts() {
+      this.$emit("handle-change-attempts", this.repository);
+      this.changeAttempts = false;
+    },
+    checkIfAdmin(){
+      if(this.profile.user_uuid === this.repository.repository_admin_uuid){
+        this.isAdmin = true
+      }
     }
   }
 };
