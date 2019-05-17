@@ -1,5 +1,5 @@
 <template>
-    <v-timeline>
+    <v-timeline dense>
         <v-timeline-item
         v-for="(item,i) in items"
         :key="i"
@@ -21,16 +21,16 @@
 <script>
     import {getDate} from "@/utils.js"
 
-    export default{
+    export default {
         name: "RepositoryTimeline",
         props: {
             repository: Object
         }, data(){
             return{
                 items: [
-                    {color: "info", icon: "publish", title: "Released on:", text: getDate(this.$props.repository.release_date)},
-                    {color: "success", icon: "done", title: "Submitted on:", text: this.submissionDate(this.$props.repository)},
-                    {color: "warning", icon: "access_alarm", title: "Due date:", text: getDate(this.$props.repository.due_date)}
+                    {color: "indigo", icon: "publish", title: "Released on:", text: getDate(this.$props.repository.release_date)},
+                    {color: "green darken-1", icon: "done", title: "Submitted on:", text: this.submissionDate(this.$props.repository)},
+                    {color: "orange darken-1", icon: "access_alarm", title: "Due date:", text: getDate(this.$props.repository.due_date)}
                 ]
             }
         },

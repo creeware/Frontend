@@ -96,15 +96,23 @@
                       </template>
                     </v-autocomplete>
                   </v-flex>
+                  <v-flex xs12>
+                    <v-textarea
+                      v-model="payload.repository_description"
+                      label="Description"
+                      auto-grow
+                      outline
+                    ></v-textarea>
+                  </v-flex>
 
                   <v-flex xs6>
-                      <v-select
-                        v-model="payload.challenge_type"
-                        :items="challenge_types"
-                        label="Challenge Type"
-                        outline
-                      ></v-select>
-                    </v-flex>
+                    <v-select
+                      v-model="payload.challenge_type"
+                      :items="challenge_types"
+                      label="Challenge Type"
+                      outline
+                    ></v-select>
+                  </v-flex>
 
                   <v-flex xs6>
                     <v-dialog
@@ -201,7 +209,8 @@ export default {
         release_date: "",
         admin_user_name: this.profile.username,
         client_name: "GitHubClient",
-        challenge_type: ""
+        challenge_type: "",
+        repository_description: ""
       }
     };
   },
