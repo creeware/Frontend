@@ -1,5 +1,5 @@
 <template>
-    <v-card color="green">
+    <v-card color="green darken-1">
         <v-card-title class="title">
             <span class="white--text">
                 <v-icon class="white--text">domain</v-icon>
