@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs4>
+      <v-flex d-flex xs12 sm12 md4 lg4 xl4>
         <profile
           :profile="profile"
           @handle-edit-profile="handleEditProfile"
@@ -34,10 +34,10 @@
           @handle-accept-canvas="handleAcceptCanvasInvitation"
         />
       </v-flex>
-      <v-flex xs4>
+      <v-flex d-flex xs12 sm12 md4 lg4 xl4>
         <profile-statistics :profile_statistics="profile_statistics"/>
       </v-flex>
-      <v-flex xs4>
+      <v-flex d-flex xs12 sm12 md4 lg4 xl4>
         <latest-organization v-if="profile_statistics.latestOrganization" :organization="profile_statistics.latestOrganization"/>
       </v-flex>
       <v-flex xs12>
