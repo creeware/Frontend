@@ -5,7 +5,7 @@
       <v-btn color="bg-success" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
     <v-layout row wrap>
-      <v-flex xs8>
+      <v-flex xs12>
         <repository-control-box
           :profile="profile"
           @handle-create-repository="handleCreateRepository"
