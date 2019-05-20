@@ -47,13 +47,13 @@ export default {
     color() {
       switch (this.bottomNav) {
         case "dashboard":
-          return "cyan darken-1";
+          return "cyan darken-2";
         case "users":
-          return "teal darken-1";
+          return "cyan darken-2";
         case "repositories":
-          return "red darken-1";
+          return "cyan darken-2";
         case "organizations":
-          return "green darken-1";
+          return "cyan darken-2";
       }
       return "white"
     }

@@ -1,5 +1,5 @@
 <template>
-    <v-card color="blue" class="mb-2">
+    <v-card color="cyan darken-1" class="mb-2">
         <v-card-title class="title">
             <span class="white--text">
                 <v-icon class="white--text">person</v-icon>

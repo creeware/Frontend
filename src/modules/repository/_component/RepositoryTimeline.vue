@@ -28,7 +28,7 @@
         }, data(){
             return{
                 items: [
-                    {color: "indigo", icon: "publish", title: "Released on:", text: getDate(this.$props.repository.release_date)},
+                    {color: "indigo darken-1", icon: "publish", title: "Released on:", text: getDate(this.$props.repository.release_date)},
                     {color: "green darken-1", icon: "done", title: "Submitted on:", text: this.submissionDate(this.$props.repository)},
                     {color: "orange darken-1", icon: "access_alarm", title: "Due date:", text: getDate(this.$props.repository.due_date)}
                 ]

@@ -18,7 +18,7 @@
               </v-card>
           </v-flex>
         </v-layout>
-          <v-card v-if="hasLoaded" color="red darken-1" class="mt-1 mx-1">
+          <v-card v-if="hasLoaded" color="cyan darken-1" class="mt-1 mx-1">
             <v-card-title class="title">
               <span class="white--text">
                 <v-icon class="white--text">folder</v-icon>
