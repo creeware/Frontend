@@ -24,7 +24,7 @@
           :organization="organization"
           :color="organizationColor"
         />
-        <repository-timeline v-if="orgLoaded&&userLoaded&&isChallenge" :repository="repository" />
+        <repository-timeline v-if="orgLoaded&&userLoaded" :repository="repository" @change-repository="handleUpdate" />
       </v-flex>
       <v-snackbar v-model="snackbar" top :timeout="10000" :color="snackbarColor">
         {{snackbarMessage}}
@@ -130,7 +130,7 @@ export default {
       this.resetRepository(this.repositoryName);
     },
     handleUpdate(repository) {
-      this.updateRepository(repository);
+      this.updateRepository(repository)
     },
     handleChangeAttempts(repository){
       this.updateRepository(repository).then(() => (this.changesApplied = true))
