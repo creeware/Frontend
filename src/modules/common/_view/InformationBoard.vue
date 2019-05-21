@@ -8,7 +8,7 @@
           @handle-integrate-canvas="handleIntegrateCanvasAccount"
           @handle-accept-canvas-invitation="handleAcceptCanvasInvitation"
           @handle-logout="logout"
-          showButtons="true"
+          :showButtons="true"
         />
         <edit-profile
           v-if="isEditProfileOpen"
