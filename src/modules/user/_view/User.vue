@@ -69,6 +69,11 @@ export default {
     UserProfile,
     RepositoryList,
     OrganizationList
+  },
+  methods: {
+    applyFilterChange(filter){
+      return filter
+    }
   }
 };
 </script>
