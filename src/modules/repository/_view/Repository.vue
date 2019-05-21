@@ -74,6 +74,7 @@ export default {
   },
   beforeMount(){
     this.checkIfAdmin();
+    this.checkIfDue(new Date(this.repository.due_date));
   },
   mounted() {
     store
@@ -114,7 +115,7 @@ export default {
           "This " + this.repository.repository_type + " has expired!";
         this.snackbarColor = "error";
         this.snackbar = true;
-      } else if (daysLeft <= 30) {
+      } else if (daysLeft <= 7) {
         this.snackbarMessage =
           "This " +
           this.repository.repository_type +
