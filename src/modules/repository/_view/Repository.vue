@@ -13,16 +13,18 @@
           showButtons
           @handle-change-attempts="handleChangeAttempts"
           :profile="profile"
+          :isChallenge="isChallenge"
         />
-        <user-card v-if="userLoaded&&orgLoaded" :user="user" :color="userColor"/>
+        <user-card v-if="userLoaded&&orgLoaded&&isChallenge" :user="user" :color="userColor"/>
       </v-flex>
       <v-flex xs12 sm12 md5 lg5 xl5 class="pa-1">
+        <user-card v-if="userLoaded&&orgLoaded&&!isChallenge" :user="user" :color="userColor"/>
         <organization-card
           v-if="orgLoaded&&userLoaded"
           :organization="organization"
           :color="organizationColor"
         />
-        <repository-timeline v-if="orgLoaded&&userLoaded" :repository="repository"/>
+        <repository-timeline v-if="orgLoaded&&userLoaded&&isChallenge" :repository="repository" />
       </v-flex>
       <v-snackbar v-model="snackbar" top :timeout="10000" :color="snackbarColor">
         {{snackbarMessage}}
@@ -75,6 +77,7 @@ export default {
     store
       .dispatch("getUser", this.repository.repository_admin_uuid)
       .then(() => (this.$data.userLoaded = true));
+    this.checkIfChallenge()
   },
   computed: mapState({
     repository: state => state.repository.repository,
