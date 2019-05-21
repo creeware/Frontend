@@ -15,12 +15,14 @@
             </template>
             <span>Coming Soon!</span>
         </v-tooltip>
+        <privacy-policy></privacy-policy>
       </v-container>
     </v-card>
   </div>
 </template>
 
 <script>
+import PrivacyPolicy from "@/modules/authentication/_component/PrivacyPolicy.vue"
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -34,6 +36,9 @@ export default {
   props: {},
   methods: {
     ...mapActions(["login"])
+  },
+  components: {
+    PrivacyPolicy
   }
 };
 </script>
