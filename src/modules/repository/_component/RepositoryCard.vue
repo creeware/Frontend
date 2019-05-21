@@ -156,12 +156,8 @@ export default {
       snackbar: false,
       isEditable: false,
       editButtonText: "Edit",
-      changeAttempts: false,
-      isAdmin: false
+      changeAttempts: false
     };
-  },
-  beforeMount(){
-    this.checkIfAdmin();
   },
   props: {
     repository: Object,
@@ -169,7 +165,8 @@ export default {
     title: String,
     showButtons: Boolean,
     profile: Object,
-    isChallenge: Boolean
+    isChallenge: Boolean,
+    isAdmin: Boolean
   },
   components: {
     DeleteRepository,
@@ -228,11 +225,6 @@ export default {
     applyChangedAttempts() {
       this.$emit("handle-change-attempts", this.repository);
       this.changeAttempts = false;
-    },
-    checkIfAdmin(){
-      if(this.profile.user_uuid === this.repository.repository_admin_uuid){
-        this.isAdmin = true
-      }
     }
   }
 };

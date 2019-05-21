@@ -14,6 +14,7 @@
           @handle-change-attempts="handleChangeAttempts"
           :profile="profile"
           :isChallenge="isChallenge"
+          :isAdmin="isAdmin"
         />
         <user-card v-if="userLoaded&&orgLoaded&&isChallenge" :user="user" :color="userColor"/>
       </v-flex>
@@ -24,7 +25,7 @@
           :organization="organization"
           :color="organizationColor"
         />
-        <repository-timeline v-if="orgLoaded&&userLoaded" :repository="repository" @change-repository="handleUpdate" />
+        <repository-timeline v-if="orgLoaded&&userLoaded&&isChallenge" :repository="repository" @change-repository="handleUpdate" :isAdmin="isAdmin"/>
       </v-flex>
       <v-snackbar v-model="snackbar" top :timeout="10000" :color="snackbarColor">
         {{snackbarMessage}}
@@ -64,11 +65,15 @@ export default {
       repositoryName: {
         repository_name: ""
       },
-      changesApplied: false
+      changesApplied: false,
+      isAdmin: false
     };
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("getRepository", to.params.uuid).then(() => next());
+  },
+  beforeMount(){
+    this.checkIfAdmin();
   },
   mounted() {
     store
@@ -134,6 +139,11 @@ export default {
     },
     handleChangeAttempts(repository){
       this.updateRepository(repository).then(() => (this.changesApplied = true))
+    },
+    checkIfAdmin(){
+      if(this.profile.user_uuid === this.repository.repository_admin_uuid){
+        this.isAdmin = true
+      }
     }
   },
   components: {

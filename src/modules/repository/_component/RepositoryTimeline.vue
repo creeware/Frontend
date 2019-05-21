@@ -13,7 +13,7 @@
                   <span class="subheading">{{ item.text }}</span>
                 </v-layout>
               </v-flex>
-              <v-flex xs12 v-if="i==0">
+              <v-flex xs12 v-if="i==0&&isAdmin">
                 <v-layout row justify-center>
                   <v-btn small @click="handleReleaseOpen" class="primary">Change Release Date</v-btn>
                 </v-layout>
@@ -32,7 +32,7 @@
                   </v-date-picker>
                 </v-dialog>
               </v-flex>
-              <v-flex xs12 sm6 md12 lg6 xl6 v-if="i==2">
+              <v-flex xs12 sm6 md12 lg6 xl6 v-if="i==2&&isAdmin">
                 <v-layout row justify-center>
                   <v-btn @click="isDueDateModalOpen=true" class="primary" small>Change Due date</v-btn>
                   <v-dialog
@@ -66,7 +66,8 @@ import { getDate } from "@/utils.js";
 export default {
   name: "RepositoryTimeline",
   props: {
-    repository: Object
+    repository: Object,
+    isAdmin: Boolean
   },
   data() {
     return {
