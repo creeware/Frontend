@@ -62,7 +62,6 @@ export default {
   }),
   data() {
     return {
-      repoLoaded: false,
       repoLoaded: false
     };
   },
@@ -70,9 +69,6 @@ export default {
     UserProfile,
     RepositoryList,
     OrganizationList
-  },
-  methods: {
-    applyFilterChange(filter) {}
   }
 };
 </script>

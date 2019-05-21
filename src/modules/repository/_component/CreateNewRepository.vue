@@ -234,7 +234,6 @@
 </template>
 
 <script>
-import { install } from "vuex";
 export default {
   name: "CreateNewRepository",
   mounted() {

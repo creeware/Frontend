@@ -66,7 +66,7 @@ export default {
       user_display_name: undefined,
       user_email: undefined
     },
-    showButtons: false
+    showButtons: Boolean
   },
   methods: {
     handleEditProfile() {
