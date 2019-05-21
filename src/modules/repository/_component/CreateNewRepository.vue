@@ -106,24 +106,6 @@
                   </v-flex>
 
                   <v-flex xs6>
-                    <v-select
-                      v-model="payload.challenge_type"
-                      :items="challenge_types"
-                      label="Challenge Type"
-                      outline
-                    ></v-select>
-                    <!-- <v-container fluid> -->
-                      <v-layout row wrap align-center>
-                        <v-flex xs7>
-                          <v-text-field v-model="payload.attempts" label="Attempts" :rules="rules.attempts"  :disabled="payload.unlimited"></v-text-field>
-                        </v-flex>
-                        <v-flex xs5>
-                          <v-checkbox v-model="payload.unlimited" color="info" label="Unlimited Attempts"></v-checkbox>
-                        </v-flex>
-                      </v-layout>
-                  </v-flex>
-
-                  <v-flex xs6>
                     <v-dialog
                       ref="dialog"
                       v-model="isSubmissionDateModalOpen"
@@ -155,7 +137,6 @@
                         >Close</v-btn>
                       </v-date-picker>
                     </v-dialog>
-                    <br>
                     <v-select
                       v-model="payload.challenge_type"
                       :items="challenge_types"
@@ -165,7 +146,7 @@
                   </v-flex>
 
                   <v-flex xs6>
-                    <v-dialog
+                                        <v-dialog
                       ref="dialog"
                       v-model="isDueDateModalOpen"
                       persistent
@@ -192,23 +173,13 @@
                         >Close</v-btn>
                       </v-date-picker>
                     </v-dialog>
-
                     <v-layout row wrap align-center>
-                      <v-flex xs7>
-                        <v-text-field
-                          v-model="payload.attempts"
-                          label="Attempts"
-                          :rules="rules.attempts"
-                          :disabled="payload.unlimited"
-                        ></v-text-field>
-                      </v-flex>
-                      <v-flex xs5>
-                        <v-checkbox
-                          v-model="payload.unlimited"
-                          color="info"
-                          label="Unlimited Attempts"
-                        ></v-checkbox>
-                      </v-flex>
+                        <v-flex xs7>
+                          <v-text-field v-model="payload.attempts" label="Attempts" :rules="rules.attempts"  :disabled="payload.unlimited"></v-text-field>
+                        </v-flex>
+                        <v-flex xs5>
+                          <v-checkbox v-model="payload.unlimited" color="info" label="Unlimited Attempts"></v-checkbox>
+                        </v-flex>
                     </v-layout>
                   </v-flex>
                 </v-layout>
